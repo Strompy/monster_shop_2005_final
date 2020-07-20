@@ -1,0 +1,21 @@
+<h1>New User Registration</h1>
+
+<%= form_tag '/register' do %>
+  <%= label_tag "Name" %>
+  <%= text_field_tag :name %>
+  <%= label_tag "Address" %>
+  <%= text_field_tag :address %>
+  <%= label_tag "City" %>
+  <%= text_field_tag :city %>
+  <%= label_tag "State" %>
+  <%= text_field_tag :state %>
+  <%= label_tag "Zip" %>
+  <%= text_field_tag :zip %>
+  <%= label_tag "E-mail" %>
+  <%= text_field_tag :email %>
+  <%= label_tag "Password" %>
+  <%= password_field_tag :password %>
+  <%= label_tag "Confirm Password" %>
+  <%= password_field_tag :c_password %>
+  <%= submit_tag "Submit" %>
+<% end %>
