@@ -5,13 +5,20 @@ class UsersController < ApplicationController
 
   def create
     user = User.create(user_params)
-    flash[:success] = "Welcome to the black market #{user.name}"
-    session[:user_id] = user.id
-    redirect_to "/profile"
+    if user.save
+      flash[:success] = "Welcome to the black market #{user.name}"
+      session[:user_id] = user.id
+      redirect_to "/profile"
+    else
+      flash[:error] = user.errors.full_messages
+      redirect_to "/register"
+    end
   end
 
   def show
-    @user = User.find(session[:user_id])
+    # if !session[:user_id].nil?
+      @user = User.find(session[:user_id])
+    # end
   end
 
   private
