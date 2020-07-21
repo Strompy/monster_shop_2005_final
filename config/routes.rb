@@ -37,7 +37,17 @@ Rails.application.routes.draw do
 
   get "/register", to: 'users#new'
   post "/register", to: 'users#create'
-  get '/profile', to: 'users#show'
 
   get "/login", to: 'sessions#new'
+  post "/login", to: 'sessions#create'
+
+  get '/profile', to: 'users#show'
+
+  namespace :admin do
+    get "/dashboard", to: 'dashboard#index'
+  end
+
+  namespace :merchant do
+    get "/dashboard", to: 'dashboard#index'
+  end
 end
