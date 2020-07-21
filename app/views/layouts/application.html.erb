@@ -13,11 +13,27 @@
       <%= link_to "Monster Shop", "/" %>
       <%= link_to "All Merchants", "/merchants"%>
       <%= link_to "All Items", "/items"%>
+
+      <% if user.nil? %>
       <%= link_to "Cart: #{cart.total_items}", "/cart" %>
-      <%= link_to "Log in", "/login" %>
       <%= link_to "Register", "/register" %>
+      <%= link_to "Log in", "/login" %>
+      <% elsif user.default? %>
+      <%= link_to "Cart: #{cart.total_items}", "/cart" %>
+      <%= link_to "My Profile", "/profile" %>
       <%= link_to "Log Out", "/logout", method: :delete %>
+      You are logged in as <%= user.name %>
+      <% elsif user.merchant? %>
+      <%= link_to "Cart: #{cart.total_items}", "/cart" %>
+      <%= link_to "Log Out", "/logout", method: :delete %>
+
+      <% elsif user.admin? %>
+      <%= link_to "Log Out", "/logout", method: :delete %>
+
+      <% end %>
+
     </nav>
+
     <% flash.each do |name, msg| %>
       <div class= "<%=name%>-flash">
         <p><%= msg %></p>

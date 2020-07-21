@@ -73,16 +73,6 @@ RSpec.describe 'Site Navigation' do
       end
     end
 
-    it "displays a link to the user registration page" do
-      visit '/merchants'
-
-      within 'nav' do
-        expect(page).to have_link("Log Out")
-        click_on "Log Out"
-        expect(current_path).to eq("/")
-      end
-    end
-
     # it "I try to access any path that begins with the following, then I see a 404 error" do
     #   visit "/merchants"
     #   expect(page).to have_content("The page you were looking for doesn't exist.")
@@ -93,5 +83,27 @@ RSpec.describe 'Site Navigation' do
     #   visit "/profile"
     #   expect(page).to have_content("The page you were looking for doesn't exist.")
     # end
+  end
+
+  describe "As a User" do
+    it "displays specific user navigation" do
+      visit "/login"
+      user = User.create!(name: "Tanya", address: "145 Uvula dr", city: "Lake", state: "Michigan", zip: "77967", email: "T-tar@gmail.com", password: "Bangladesh134", role: 0)
+
+      expect(user.default?).to be_truthy
+
+      fill_in :email, with: "T-tar@gmail.com"
+      fill_in :password, with: "Bangladesh134"
+      click_on "Log In"
+
+      expect(page).to have_link("Monster Shop")
+      expect(page).to have_link("All Items")
+      expect(page).to have_link("All Merchants")
+      expect(page).to have_link("Cart")
+      expect(page).to have_link("My Profile")
+      expect(page).to have_link("Log Out")
+      expect(page).to_not have_link("Log In")
+      expect(page).to have_content("You are logged in as #{user.name}")
+    end
   end
 end
