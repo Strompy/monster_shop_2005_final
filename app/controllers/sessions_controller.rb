@@ -22,6 +22,13 @@ class SessionsController < ApplicationController
     end
   end
 
+  def destroy
+    session.delete(:user_id)
+    session.delete(:cart)
+    redirect_to "/"
+    flash[:success] = "You have successfully logged out"
+  end
+
   private
   def user_redirect(user)
     if user.admin?

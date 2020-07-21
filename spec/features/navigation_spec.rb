@@ -73,6 +73,16 @@ RSpec.describe 'Site Navigation' do
       end
     end
 
+    it "displays a link to the user registration page" do
+      visit '/merchants'
+
+      within 'nav' do
+        expect(page).to have_link("Log Out")
+        click_on "Log Out"
+        expect(current_path).to eq("/")
+      end
+    end
+
     # it "I try to access any path that begins with the following, then I see a 404 error" do
     #   visit "/merchants"
     #   expect(page).to have_content("The page you were looking for doesn't exist.")
