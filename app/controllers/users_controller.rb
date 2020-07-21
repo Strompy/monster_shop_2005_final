@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def new
-    require "pry"; binding.pry
+     @user ||= Hash.new("")
   end
 
   def create
@@ -10,8 +10,9 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect_to "/profile"
     else
+      @user = user_params
       flash[:error] = user.errors.full_messages
-      redirect_to "/register"
+      render :new
     end
   end
 
