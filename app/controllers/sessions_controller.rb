@@ -1,6 +1,13 @@
 class SessionsController < ApplicationController
 
   def new
+    if session[:user_id].nil?
+      render :new
+    else
+      user = User.find(session[:user_id])
+      user_redirect(user)
+      flash[:error] = "You are already logged in"
+    end
   end
 
   def create
