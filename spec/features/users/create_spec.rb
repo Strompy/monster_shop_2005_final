@@ -67,6 +67,13 @@ RSpec.describe "When I use the navbar to register a user" do
 
     expect(current_path).to eq('/register')
 
+    expect(find_field(:name).value).to eq('Tanya')
+    expect(find_field(:address).value).to eq('145 Uvula dr')
+    expect(find_field(:city).value).to eq('Lake')
+    expect(find_field(:state).value).to eq('Michigan')
+    expect(find_field(:zip).value).to eq('77967')
+    expect(find_field(:email).value).to eq('T-tar@gmail.com')
+
     fill_in :email, with: "Tanya@gmail.com"
     fill_in :password, with: "Bangladesh134"
     fill_in :c_password, with: "Bangladesh134"
