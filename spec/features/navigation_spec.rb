@@ -86,16 +86,18 @@ RSpec.describe 'Site Navigation' do
   end
 
   describe "As a User" do
-    it "displays specific user navigation" do
+    before :each do
+      @user = User.create!(name: "Tanya", address: "145 Uvula dr", city: "Lake", state: "Michigan", zip: "77967", email: "T-tar@gmail.com", password: "Bangladesh134", role: 0)
       visit "/login"
-      user = User.create!(name: "Tanya", address: "145 Uvula dr", city: "Lake", state: "Michigan", zip: "77967", email: "T-tar@gmail.com", password: "Bangladesh134", role: 0)
 
-      expect(user.default?).to be_truthy
+      expect(@user.default?).to be_truthy
 
       fill_in :email, with: "T-tar@gmail.com"
       fill_in :password, with: "Bangladesh134"
       click_on "Log In"
+    end
 
+    it "displays specific user navigation" do
       expect(page).to have_link("Monster Shop")
       expect(page).to have_link("All Items")
       expect(page).to have_link("All Merchants")
@@ -103,9 +105,19 @@ RSpec.describe 'Site Navigation' do
       expect(page).to have_link("My Profile")
       expect(page).to have_link("Log Out")
       expect(page).to_not have_link("Log In")
-      expect(page).to have_content("You are logged in as #{user.name}")
+      expect(page).to have_content("You are logged in as #{@user.name}")
     end
 
+    it "I try to access any path that begins with the following, then I see a 404 error" do
+      visit "/merchant/dashboard"
+      expect(page).to have_content("The page you were looking for doesn't exist.")
+
+      visit "/admin/dashboard"
+      expect(page).to have_content("The page you were looking for doesn't exist.")
+    end
+  end
+
+  describe "As a merchant" do
     it "displays specific merchant navigation" do
       visit "/login"
       user = User.create!(name: "Tanya", address: "145 Uvula dr", city: "Lake", state: "Michigan", zip: "77967", email: "T-tar@gmail.com", password: "Bangladesh134", role: 1)
@@ -124,7 +136,9 @@ RSpec.describe 'Site Navigation' do
       expect(page).to have_link("Log Out")
       expect(page).to_not have_link("Log In")
     end
+  end
 
+  describe "As an Admin" do
     it "displays specific admin navigation" do
       visit "/login"
       user = User.create!(name: "Tanya", address: "145 Uvula dr", city: "Lake", state: "Michigan", zip: "77967", email: "T-tar@gmail.com", password: "Bangladesh134", role: 2)
