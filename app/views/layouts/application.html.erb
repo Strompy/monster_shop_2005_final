@@ -32,6 +32,8 @@
 
       <% elsif user.admin? %>
       <%= link_to "Log Out", "/logout", method: :delete %>
+      <%= link_to "My Dashboard", "/admin/dashboard" %>
+      <%= link_to "All Users", "/admin/users" %>
 
       <% end %>
 

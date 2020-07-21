@@ -124,5 +124,25 @@ RSpec.describe 'Site Navigation' do
       expect(page).to have_link("Log Out")
       expect(page).to_not have_link("Log In")
     end
+
+    it "displays specific admin navigation" do
+      visit "/login"
+      user = User.create!(name: "Tanya", address: "145 Uvula dr", city: "Lake", state: "Michigan", zip: "77967", email: "T-tar@gmail.com", password: "Bangladesh134", role: 2)
+
+      expect(user.admin?).to be_truthy
+
+      fill_in :email, with: "T-tar@gmail.com"
+      fill_in :password, with: "Bangladesh134"
+      click_on "Log In"
+
+      expect(page).to have_link("Monster Shop")
+      expect(page).to have_link("All Items")
+      expect(page).to have_link("All Merchants")
+      expect(page).to_not have_link("Cart")
+      expect(page).to have_link("My Dashboard")
+      expect(page).to have_link("Log Out")
+      expect(page).to_not have_link("Log In")
+      expect(page).to have_link("All Users")
+    end
   end
 end
