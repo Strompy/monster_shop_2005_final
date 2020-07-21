@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def new
-     @user ||= Hash.new("")
+     @user_input ||= Hash.new("")
   end
 
   def create
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect_to "/profile"
     else
-      @user = user_params
+      @user_input = user_params
       flash[:error] = user.errors.full_messages
       render :new
     end
