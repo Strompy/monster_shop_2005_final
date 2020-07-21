@@ -118,16 +118,18 @@ RSpec.describe 'Site Navigation' do
   end
 
   describe "As a merchant" do
-    it "displays specific merchant navigation" do
+    before :each do
+      @user = User.create!(name: "Tanya", address: "145 Uvula dr", city: "Lake", state: "Michigan", zip: "77967", email: "T-tar@gmail.com", password: "Bangladesh134", role: 1)
       visit "/login"
-      user = User.create!(name: "Tanya", address: "145 Uvula dr", city: "Lake", state: "Michigan", zip: "77967", email: "T-tar@gmail.com", password: "Bangladesh134", role: 1)
 
-      expect(user.merchant?).to be_truthy
+      expect(@user.merchant?).to be_truthy
 
       fill_in :email, with: "T-tar@gmail.com"
       fill_in :password, with: "Bangladesh134"
       click_on "Log In"
+    end
 
+    it "displays specific merchant navigation" do
       expect(page).to have_link("Monster Shop")
       expect(page).to have_link("All Items")
       expect(page).to have_link("All Merchants")
@@ -135,6 +137,11 @@ RSpec.describe 'Site Navigation' do
       expect(page).to have_link("My Dashboard")
       expect(page).to have_link("Log Out")
       expect(page).to_not have_link("Log In")
+    end
+
+    it "I try to access any path that begins with the following, then I see a 404 error" do
+      visit "/admin/dashboard"
+      expect(page).to have_content("The page you were looking for doesn't exist.")
     end
   end
 
