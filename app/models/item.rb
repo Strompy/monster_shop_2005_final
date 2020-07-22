@@ -25,4 +25,12 @@ class Item <ApplicationRecord
     item_orders.empty?
   end
 
+  def self.order_by_pop
+    Item.joins(:item_orders).select('SUM(item_orders.quantity) AS sum_quantity, items.name').group('items.id').order('SUM(item_orders.quantity) desc').limit(5)
+  end
+
+  def self.order_by_least_pop
+    Item.joins(:item_orders).select('SUM(item_orders.quantity) AS sum_quantity, items.name').group('items.id').order('SUM(item_orders.quantity)').limit(5)
+  end
+
 end
