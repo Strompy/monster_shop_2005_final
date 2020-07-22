@@ -19,4 +19,17 @@
       <% end %>
     </section>
     <% end %>
+    <section id = "pop">
+      <% @items.order_by_pop.each do |item| %>
+        <%= item.name %>
+        <%= item.sum_quantity %>
+      <% end %>
+    </section>
+
+    <section id = "least_pop">
+      <% @items.order_by_least_pop.each do |item| %>
+        <%= item.name %>
+        <%= item.sum_quantity %>
+      <% end %>
+    </section>
 </section>
