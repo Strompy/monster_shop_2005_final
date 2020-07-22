@@ -1,4 +1,6 @@
 class CartController < ApplicationController
+  before_action :deny_admin
+
   def add_item
     item = Item.find(params[:item_id])
     cart.add_item(item.id.to_s)
@@ -20,5 +22,10 @@ class CartController < ApplicationController
     redirect_to '/cart'
   end
 
-
+  private
+  def deny_admin
+    if !user.nil? && user.admin?
+      render file: "/public/404"
+    end
+  end
 end

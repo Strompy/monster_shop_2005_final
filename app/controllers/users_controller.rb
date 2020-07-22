@@ -17,9 +17,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    # if !session[:user_id].nil?
+    if session[:user_id].nil?
+      render file: "/public/404"
+    else
       @user = User.find(session[:user_id])
-    # end
+    end
   end
 
   private
