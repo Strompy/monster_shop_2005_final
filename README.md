@@ -86,7 +86,7 @@ Be careful to watch out for which stories allow full deletion of content, and re
 ## Deploying to Heroku
 
 ```
-[ ] done
+[X] done
 
 User Story 1, Deploy your application to Heroku
 
@@ -114,7 +114,7 @@ You will need to set up some basic routing and empty controller actions and empt
 
 
 ```
-[ ] done
+[X] done
 
 User Story 2, Visitor Navigation
 
@@ -132,7 +132,7 @@ Next to the shopping cart link I see a count of the items in my cart
 ```
 
 ```
-[ ] done
+[X] done
 
 User Story 3, User Navigation
 
@@ -149,7 +149,7 @@ I also see text that says "Logged in as Mike Dao" (or whatever my name is)
 ```
 
 ```
-[ ] done
+[X] done
 
 User Story 4, Merchant Navigation
 
@@ -160,7 +160,7 @@ Plus the following links:
 ```
 
 ```
-[ ] done
+[X] done
 
 User Story 5, Admin Navigation
 
@@ -175,7 +175,7 @@ Minus the following links/info
 ```
 
 ```
-[ ] done
+[X] done
 
 User Story 6, Visitor Navigation Restrictions
 
@@ -187,7 +187,7 @@ When I try to access any path that begins with the following, then I see a 404 e
 ```
 
 ```
-[ ] done
+[X] done
 
 User Story 7, User Navigation Restrictions
 
@@ -198,7 +198,7 @@ When I try to access any path that begins with the following, then I see a 404 e
 ```
 
 ```
-[ ] done
+[X] done
 
 User Story 8, Merchant Navigation Restrictions
 
@@ -208,7 +208,7 @@ When I try to access any path that begins with the following, then I see a 404 e
 ```
 
 ```
-[ ] done
+[X] done
 
 User Story 9, Admin Navigation Restrictions
 
@@ -225,7 +225,7 @@ This series of stories will allow a user to register on the site.
 
 
 ```
-[ ] done
+[X] done
 
 User Story 10, User Registration
 
@@ -251,7 +251,7 @@ I see a flash message indicating that I am now registered and logged in
 ```
 
 ```
-[ ] done
+[X] done
 
 User Story 11, User Registration Missing Details
 
@@ -263,7 +263,7 @@ And I see a flash message indicating that I am missing required fields
 ```
 
 ```
-[ ] done
+[X] done
 
 User Story 12, Registration Email must be unique
 
@@ -284,7 +284,7 @@ Our application wouldn't be much use if users could not log in to use it.
 
 
 ```
-[ ] done
+[X] done
 
 User Story 13, User can Login
 
@@ -299,7 +299,7 @@ And I see a flash message that I am logged in
 ```
 
 ```
-[ ] done
+[X] done
 
 User Story 14, User cannot log in with bad credentials
 
@@ -312,7 +312,7 @@ I am NOT told whether it was my email or password that was incorrect
 ```
 
 ```
-[ ] done
+[X] done
 
 User Story 15, Users who are logged in already are redirected
 
@@ -325,7 +325,7 @@ And I see a flash message that tells me I am already logged in
 ```
 
 ```
-[ ] done
+[X] done
 
 User Story 16, User can log out
 
@@ -439,7 +439,7 @@ And I see a flash message telling me that email address is already in use
 This is what this app is all about: how a user can put things in a shopping cart and check out, creating an order in the process. We want to add functionality to the cart to increment and decrement the quantity within the cart.
 
 ### Visitors, Regular Users, and Merchant Employees only
-Merchant Employees can order items in addition to regular users. Admin can not order items. This should already be taken care of through the navigation restrictions you set in User Stories 5 & 9. 
+Merchant Employees can order items in addition to regular users. Admin can not order items. This should already be taken care of through the navigation restrictions you set in User Stories 5 & 9.
 
 ```
 [ ] done
@@ -570,7 +570,7 @@ User Story 30, User cancels an order
 
 As a registered user
 When I visit an order's show page
-I see a button or link to cancel the order 
+I see a button or link to cancel the order
 When I click the cancel button for an order, the following happens:
 - Each row in the "order items" table is given a status of "unfulfilled"
 - The order itself is given a status of "cancelled"
@@ -1100,4 +1100,3 @@ Instead I see a big red notice next to the item indicating I cannot fulfill this
 | **3: Passing** | Students complete all User Stories. No more than 2 Stories fail to correctly implement sad path and edge case functionality. | Students use the principles of MVC to effectively organize code. Students can defend any of their design decisions. Students limit access to authorized users. | ActiveRecord is used in a clear and effective way to read/write data using no Ruby to process data. | 100% coverage for models. 98% coverage for features. Tests are well written and meaningful. | Students have a README with thorough implementation instructions and description of content. |
 | **2: Passing with Concerns** | Students complete all but 1 - 3 User Stories | Students utilize MVC to organize code, but cannot defend some of their design decisions. Or some functionality is not limited to the appropriately authorized users. | Ruby is used to process data that could use ActiveRecord instead. | Feature test coverage between 90% and 98%, or model test coverage below 100%, or tests are not meaningfully written or have an unclear objective. | Students have a README but it is not thorough in describing the implementation or content of the project. |
 | **1: Failing** | Students fail to complete 4 or more User Stories | Students do not effectively organize code using MVC. Or students do not authorize users. | Ruby is used to process data more often than ActiveRecord | Below 90% coverage for either features or models. | Students did not create their own README. |
-
