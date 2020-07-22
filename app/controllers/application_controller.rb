@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   helper_method :cart, :user
 
   def cart
-    @cart ||= Cart.new(session[:cart] ||= Hash.new(0))
+    cart ||= Cart.new(session[:cart] ||= Hash.new(0))
   end
 
   def user
