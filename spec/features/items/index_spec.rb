@@ -77,11 +77,16 @@ RSpec.describe "Items Index Page" do
       expect(page).to_not have_content("Inventory: #{@dog_bone.inventory}")
       expect(page).to_not have_css("img[src*='#{@dog_bone.image}']")
 
-      # binding.pry
-      # page.find("img[src*='#{@pull_toy.image}']").click
-      #
-      # expect(current_path).to eq("/items/#{@pull_toy.id}")
+      find(:xpath, "//a/img[@alt='Pull Toy: photo']/..").click
+
+      expect(current_path).to eq("/items/#{@pull_toy.id}")
 
     end
+
+    # it "has popularity statistics" do
+    #   visit "/items"
+    #
+    #
+    # end
   end
 end
