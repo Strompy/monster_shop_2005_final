@@ -28,7 +28,11 @@ describe Item, type: :model do
       @plane = @bike_shop.items.create(name: "Plane", description: "Yerp", price: 17, image: "https://img.chewy.com/is/image/catalog/54226_MAIN._AC_SL1500_V1534449573_.jpg", inventory: 89)
       @baklava = @bike_shop.items.create(name: "Baklava", description: "Flaky!", price: 78, image: "https://img.chewy.com/is/image/catalog/54226_MAIN._AC_SL1500_V1534449573_.jpg", inventory: 43)
 
-      @order_1 = Order.create(name: "John", address: "124 Lickit dr", city: "Denver", state: "Colorado", zip: 80890)
+      @user = User.create!(name: "Tanya", address: "145 Uvula dr", city: "Lake", state: "Michigan", zip: 80203, email: "tot@example.com", password: "password", role: 0)
+
+      allow_any_instance_of(ApplicationController).to receive(:user).and_return(@user)
+
+      @order_1 = @user.orders.create(name: "John", address: "124 Lickit dr", city: "Denver", state: "Colorado", zip: 80890)
 
       ItemOrder.create(item: @pull_toy, order: @order_1, quantity: 7, price: 89)
       ItemOrder.create(item: @tire, order: @order_1, quantity: 3, price: 89)

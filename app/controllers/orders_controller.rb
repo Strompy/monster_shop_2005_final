@@ -9,7 +9,7 @@ class OrdersController <ApplicationController
   end
 
   def create
-    order = Order.create(order_params)
+    order = user.orders.create(order_params)
     if order.save
       cart.items.each do |item,quantity|
         order.item_orders.create({
@@ -19,15 +19,23 @@ class OrdersController <ApplicationController
           })
       end
       session.delete(:cart)
-      redirect_to "/orders/#{order.id}"
+      flash[:success] = "Order successfully placed"
+      redirect_by_role(order)
     else
       flash[:notice] = "Please complete address form to create an order."
       render :new
     end
   end
 
-
   private
+
+  def redirect_by_role(order)
+    if user.default?
+      redirect_to '/profile/orders'
+    else
+      redirect_to "/orders/#{order.id}"
+    end
+  end
 
   def order_params
     params.permit(:name, :address, :city, :state, :zip)
