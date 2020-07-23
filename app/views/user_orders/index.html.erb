@@ -1,7 +1,12 @@
 <h1>Your Orders</h1>
 
 <% @user.orders.each do |order| %>
+<section class="order-<%= order.id %>">
   <h3>Order Status: <%= order.status %></h3>
+  <p><%= link_to "Order ##{order.id}","/orders/#{order.id}" %>
+  <p>Order placed at: <%= order.created_at %></p>
+  <p>Order last updated at: <%= order.updated_at %></p>
+  <p>Total number of items: <%= order.total_quantity %></p>
   <h3>Shipping Info</h3>
   <p>Name:<%= order.name %></p>
   <p>Address: <%= order.address %></p>
@@ -15,3 +20,4 @@
 
   <p>Grand Total: <%= order.grandtotal %></p>
 <% end %>
+</section>

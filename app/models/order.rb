@@ -13,6 +13,10 @@ class Order < ApplicationRecord
     item_orders.sum('price * quantity')
   end
 
+  def total_quantity
+    item_orders.sum(:quantity)
+  end
+
   private
 
   def default_status
