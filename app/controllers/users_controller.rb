@@ -28,6 +28,10 @@ class UsersController < ApplicationController
     @user = User.find(session[:user_id])
   end
 
+  def edit_password
+    @user = User.find(session[:user_id])
+  end
+
   def update
     user = User.find(session[:user_id])
     user.update(user_params)
@@ -35,9 +39,20 @@ class UsersController < ApplicationController
     redirect_to "/profile"
   end
 
+  def update_password
+    user = User.find(session[:user_id])
+    user.update(user_params)
+    flash[:success] = "Your password has been updated!"
+    redirect_to "/profile"
+  end
+
   private
 
   def user_params
     params.permit(:name, :address, :city, :state, :zip, :email, :password)
+  end
+
+  def change_password(password)
+
   end
 end
