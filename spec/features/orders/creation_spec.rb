@@ -48,7 +48,7 @@ RSpec.describe("Order Creation") do
 
       new_order = Order.last
 
-      expect(current_path).to eq("/orders/#{new_order.id}")
+      visit "/orders/#{new_order.id}"
 
       within '.shipping-address' do
         expect(page).to have_content(name)

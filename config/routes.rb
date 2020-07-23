@@ -48,9 +48,11 @@ Rails.application.routes.draw do
   patch '/profile', to: 'users#update'
   get '/profile/password_edit', to: 'users#edit_password' #passwordscontroller?
   patch '/profile/password_update', to: 'users#update_password'
+  get '/profile/orders', to: 'user_orders#index'
 
   namespace :admin do
     get "/dashboard", to: 'dashboard#index'
+
   end
 
   namespace :merchant do

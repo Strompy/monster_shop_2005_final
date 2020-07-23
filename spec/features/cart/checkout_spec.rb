@@ -53,8 +53,12 @@ RSpec.describe 'Cart show' do
       visit "/items/#{@pencil.id}"
       click_on "Add To Cart"
       @items_in_cart = [@paper,@tire,@pencil]
-      user = User.create!(name: "Tanya", address: "145 Uvula dr", city: "Lake", state: "Michigan", zip: 80203, email: "tot@example.com", password: "password", role: 0)
-      allow_any_instance_of(ApplicationController).to receive(:user).and_return(user)
+      @user = User.create!(name: "Tanya", address: "145 Uvula dr", city: "Lake", state: "Michigan", zip: 80203, email: "tot@example.com", password: "password", role: 0)
+      visit "/login"
+      fill_in :email, with: "tot@example.com"
+      fill_in :password, with: "password"
+      click_on "Log In"
+      allow_any_instance_of(ApplicationController).to receive(:user).and_return(@user)
     end
     it "click the checkout link and create order" do
       visit '/cart'
@@ -79,14 +83,14 @@ RSpec.describe 'Cart show' do
 
       expect(current_path).to eq("/profile/orders")
 
-      expect(page).to have_content("Order Successfully Placed")
+      expect(page).to have_content("Order successfully placed")
       expect(page).to have_content("pending")
 
       expect(page).to have_content(@tire.name)
       expect(page).to have_content(@paper.name)
       expect(page).to have_content(@pencil.name)
 
-      expect(page).to have_content(new_order.total)
+      expect(page).to have_content(new_order.grandtotal)
 
       expect(page).to have_content("Cart: 0")
     end
