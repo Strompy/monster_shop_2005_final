@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   delete "/reviews/:id", to: "reviews#destroy"
 
   post "/cart/:item_id", to: "cart#add_item"
+  patch "/cart/:item_id", to: "cart#update_item"
   get "/cart", to: "cart#show"
   delete "/cart", to: "cart#empty"
   delete "/cart/:item_id", to: "cart#remove_item"
@@ -46,7 +47,7 @@ Rails.application.routes.draw do
   get '/profile/edit', to: 'users#edit'
   patch '/profile', to: 'users#update'
   get '/profile/password_edit', to: 'users#edit_password'
-  patch '/profile/password_update', to: 'users#update_password' 
+  patch '/profile/password_update', to: 'users#update_password'
 
   namespace :admin do
     get "/dashboard", to: 'dashboard#index'

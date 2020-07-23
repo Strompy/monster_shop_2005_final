@@ -8,6 +8,23 @@ class CartController < ApplicationController
     redirect_to "/items"
   end
 
+  def update_item
+    item = Item.find(params[:item_id])
+    quantity = params[:quantity].to_i
+    if quantity > item.inventory
+      flash[:error] = "Quantity cannot be greater than #{item.inventory}"
+      redirect_to '/cart'
+    elsif quantity < 0
+      flash[:error] = "Quantity cannot be less than 0"
+      redirect_to '/cart'
+    elsif quantity == 0
+      remove_item
+    else
+      cart.contents[params[:item_id]] = quantity
+      redirect_to '/cart'
+    end
+  end
+
   def show
     @items = cart.items
   end

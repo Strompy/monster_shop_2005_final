@@ -342,7 +342,7 @@ Any items I had in my shopping cart are deleted
 This is the main "catalog" page of the entire site where users will start their e-commerce experience. Visitors to the site, and regular users, will be able to view an index page of all items available for purchase and some basic statistics. Each item will also have a "show" page where more information is shown.
 
 ```
-[ ] done
+[X] done
 
 User Story 17, Items Index Page
 
@@ -354,7 +354,7 @@ The item image is a link to that item's show page
 ```
 
 ```
-[ ] done
+[X] done
 
 User Story 18, Items Index Page Statistics
 
@@ -376,7 +376,7 @@ When a user who is not a merchant nor an admin logs into the system, they are ta
 Admin users can access a namespaced route of "/admin/users" to see an index page  of all non-merchant/non-admin users, and from there see each user. This will allow the admin to perform every action on a user's account that the user themselves can perform. This functionality is taken care of in User Stories 53 & 54.
 
 ```
-[ ] done
+[X] done
 
 User Story 19, User Profile Show Page
 
@@ -387,7 +387,7 @@ And I see a link to edit my profile data
 ```
 
 ```
-[ ] done
+[X] done
 
 User Story 20, User Can Edit their Profile Data
 
@@ -405,7 +405,7 @@ And I see my updated information
 ```
 
 ```
-[ ] done
+[ X] done
 
 User Story 21, User Can Edit their Password
 
@@ -421,7 +421,7 @@ And I see a flash message telling me that my password is updated
 ```
 
 ```
-[ ] done
+[X] done
 
 User Story 22, User Editing Profile Data must have unique Email address
 
