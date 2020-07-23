@@ -25,7 +25,14 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(session[:user_id])
+  end
 
+  def update
+    user = User.find(session[:user_id])
+    user.update(user_params)
+    flash[:success] = "Your data has been updated!"
+    redirect_to "/profile"
   end
 
   private

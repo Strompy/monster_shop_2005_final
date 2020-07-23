@@ -44,6 +44,7 @@ Rails.application.routes.draw do
 
   get '/profile', to: 'users#show'
   get '/profile/edit', to: 'users#edit'
+  patch '/profile', to: 'users#update'
 
   namespace :admin do
     get "/dashboard", to: 'dashboard#index'
