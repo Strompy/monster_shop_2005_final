@@ -43,6 +43,10 @@ Rails.application.routes.draw do
   delete "/logout", to: 'sessions#destroy'
 
   get '/profile', to: 'users#show'
+  get '/profile/edit', to: 'users#edit'
+  patch '/profile', to: 'users#update'
+  get '/profile/password_edit', to: 'users#edit_password'
+  patch '/profile/password_update', to: 'users#update_password' 
 
   namespace :admin do
     get "/dashboard", to: 'dashboard#index'
