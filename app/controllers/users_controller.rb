@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def create
     user = User.create(user_params)
+    # add c_password and check for equal
     if user.save
       flash[:success] = "Welcome to the black market #{user.name}"
       session[:user_id] = user.id

@@ -74,7 +74,38 @@ RSpec.describe 'Cart creation' do
         click_on "Update Quantity"
         expect(page).to have_content("5")
       end
+    end
 
+    it "And I visit my cart, each item has a button or link to decrement the count of items, cannot decrease the count below the item's inventory" do
+      visit '/cart'
+
+      within "#cart-item-#{@tire.id}" do
+        expect(page).to have_link(@tire.name)
+        expect(page).to have_content("1")
+        fill_in :quantity, with: "2"
+        click_on "Update Quantity"
+        expect(current_path).to eq("/cart")
+        expect(page).to have_content("2")
+        fill_in :quantity, with: "1"
+        click_on "Update Quantity"
+        expect(current_path).to eq("/cart")
+        expect(page).to have_content("1")
+        fill_in :quantity, with: "-1"
+        click_on "Update Quantity"
+        expect(page).to have_content("1")
+      end
+    end
+    it "And I visit my cart, setting counter to 0 removes item from cart" do
+      visit '/cart'
+
+      within "#cart-item-#{@tire.id}" do
+        expect(page).to have_link(@tire.name)
+        expect(page).to have_content("1")
+        fill_in :quantity, with: "0"
+        click_on "Update Quantity"
+      end
+      expect(current_path).to eq("/cart")
+      expect(page).to_not have_content(@tire.name)
     end
   end
 
