@@ -19,6 +19,8 @@ RSpec.describe 'Cart show' do
     end
 
     it 'Theres a link to checkout' do
+      user = User.create!(name: "Tanya", address: "145 Uvula dr", city: "Lake", state: "Michigan", zip: 80203, email: "tot@example.com", password: "password", role: 0)
+      allow_any_instance_of(ApplicationController).to receive(:user).and_return(user)
       visit "/cart"
 
       expect(page).to have_link("Checkout")

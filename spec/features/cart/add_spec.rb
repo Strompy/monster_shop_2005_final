@@ -107,9 +107,14 @@ RSpec.describe 'Cart creation' do
       expect(current_path).to eq("/cart")
       expect(page).to_not have_content(@tire.name)
     end
-  end
+    it "Prompts Visitors to register to finish checkout" do
+      visit "/cart"
 
-  # Next to each item in my cart
-  # I see a button or link to increment the count of items I want to purchase
-  # I cannot increment the count beyond the item's inventory size
+      expect(page).to have_content("Please Register or Log In to checkout")
+      within ".cart-checkout" do
+        expect(page).to have_link("Register")
+        expect(page).to have_link("Log In")
+      end
+    end
+  end
 end
