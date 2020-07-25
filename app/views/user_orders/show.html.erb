@@ -1,5 +1,5 @@
 <section class = "shipping-address">
-  <h1 align = "center">Order Details</h1>
+  <h1 align = "center">Order information</h1>
   <table>
     <tr>
       <th>Order Number</th>
@@ -14,7 +14,7 @@
   </table>
 </section>
 
-<h1 align = "center">Order Info</h1>
+<h1 align = "center">Order Details</h1>
 <center>
 
   <table>
@@ -41,7 +41,7 @@
 </table>
 
 <section id="grandtotal">
-  <p>Total: <%=number_to_currency(@order.grandtotal)%></p>
+  <h3>Total: <%=number_to_currency(@order.grandtotal)%></h3>
 </section>
 <section id="datecreated">
   <p>Order Created: <%= @order.created_at%></p>
