@@ -70,11 +70,20 @@ RSpec.describe "User Orders Index page" do
       end
 
       expect(@order_1.status).to eq("cancelled")
-      
+
       @order_1.item_orders.each do |item_order|
         expect(item_order.status).to eq("unfulfilled")
       end
       # - Any item quantities in the order that were previously fulfilled have their quantities returned to their respective merchant's inventory for that item.
+    end
+
+    it "will show packaged if all items are fulfilled" do
+      @item_order1.update(status: 3)
+      @item_order2.update(status: 3)
+      visit "/profile/orders/#{@order_1.id}"
+      click_on "Update Order"
+
+      expect(page).to have_content("packaged")
     end
 
 end

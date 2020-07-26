@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   post "/orders", to: "orders#create"
   get "/orders/:id", to: "orders#show"
   delete "/orders/:id", to: "orders#destroy"
+  patch "/orders/:order_id", to: 'orders#update'
 
   get "/register", to: 'users#new'
   post "/register", to: 'users#create'

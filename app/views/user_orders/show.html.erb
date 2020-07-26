@@ -48,3 +48,4 @@
   <p>Order Created: <%= @order.created_at%></p>
   <p>Order Last Updated: <%= @order.updated_at%></p>
 </section>
+<p><%= link_to "Update Order", "/orders/#{@order.id}", method: :patch %></p>
