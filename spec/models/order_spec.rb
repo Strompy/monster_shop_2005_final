@@ -36,7 +36,12 @@ describe Order, type: :model do
     end
     it 'total_quantity' do
       expect(@order_1.total_quantity).to eq(5)
-
+    end
+    it "cancel_item_orders" do
+      @order_1.cancel_item_orders
+      @order_1.item_orders.each do |item_order|
+        expect(item_order.status).to eq("unfulfilled")
+      end
     end
   end
 end
