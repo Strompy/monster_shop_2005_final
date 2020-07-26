@@ -5,6 +5,12 @@ class Admin::DashboardController < ApplicationController
     @orders = Order.all
   end
 
+  def update
+    order = Order.find(params[:id])
+    order.update(status: 3)
+    redirect_to "/admin/dashboard"
+  end
+
   private
   def require_admin
     if user.nil? || !user.admin?

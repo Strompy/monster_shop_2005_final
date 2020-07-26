@@ -33,9 +33,13 @@ RSpec.describe "When I visit the admin dashboard" do
     expect("Order Id: #{@order_2.id}").to appear_before("Order Id: #{@order_1.id}")
   end
 
-  xit "has a button to ship orders" do
+  it "has a button to ship orders" do
     visit '/admin/dashboard'
 
     click_on "Ship Order"
+
+    expect(current_path).to eq("/admin/dashboard")
+
+    expect("Order Id: #{@order_1.id}").to appear_before("Order Id: #{@order_2.id}")
   end
 end
