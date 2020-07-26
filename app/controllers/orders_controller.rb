@@ -29,6 +29,7 @@ class OrdersController <ApplicationController
 
   def destroy
     order = Order.find(params[:id])
+    # return any fulfilled items to merchants
     order.status = 4
     order.cancel_item_orders
     order.save
