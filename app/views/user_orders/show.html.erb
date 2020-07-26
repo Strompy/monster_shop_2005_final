@@ -42,6 +42,7 @@
 
 <section id="grandtotal">
   <h3>Total: <%=number_to_currency(@order.grandtotal)%></h3>
+  <p>Change your mind? <%= link_to "Cancel Order", "/orders/#{@order.id}", method: :delete %></p>
 </section>
 <section id="datecreated">
   <p>Order Created: <%= @order.created_at%></p>

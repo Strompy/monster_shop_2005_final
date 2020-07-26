@@ -27,6 +27,16 @@ class OrdersController <ApplicationController
     end
   end
 
+  def destroy
+    order = Order.find(params[:id])
+    order.status = 4
+    order.cancel_item_orders
+    order.save
+    flash[:success] = "Your order is cancelled"
+    require "pry"; binding.pry
+    redirect_by_role(order)
+  end
+
   private
 
   def redirect_by_role(order)
@@ -40,4 +50,5 @@ class OrdersController <ApplicationController
   def order_params
     params.permit(:name, :address, :city, :state, :zip)
   end
+
 end

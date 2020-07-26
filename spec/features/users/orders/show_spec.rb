@@ -52,8 +52,29 @@ RSpec.describe "User Orders Index page" do
         expect(page).to have_content(@pencil.price)
         expect(page).to have_content(@item_order2.subtotal)
         expect(page).to have_css("img[src*='#{@pencil.image}']")
-
       end
+    end
+    it "allows user to cancel an order" do
+      visit "/profile/orders/#{@order_1.id}"
+
+      expect(page).to have_link("Cancel Order")
+
+      click_on "Cancel Order"
+
+      expect(current_path).to eq("/profile/orders")
+
+      expect(page).to have_content("Your order is cancelled")
+
+      within ".order-#{@order_1.id}" do
+        expect(page).to have_content("cancelled")
+      end
+
+      expect(@order_1.status).to eq("cancelled")
+      
+      @order_1.item_orders.each do |item_order|
+        expect(item_order.status).to eq("unfulfilled")
+      end
+      # - Any item quantities in the order that were previously fulfilled have their quantities returned to their respective merchant's inventory for that item.
     end
 
 end

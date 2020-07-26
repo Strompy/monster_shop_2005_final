@@ -20,6 +20,7 @@ class Order < ApplicationRecord
   def cancel_item_orders
     item_orders.each do |item_order|
       item_order.status = 2
+      item_order.save
     end
   end
 
