@@ -4,4 +4,8 @@ class UserOrdersController < ApplicationController
     @user = user
   end
 
+  def show
+    @order = Order.find(params[:order_id])
+  end
+
 end

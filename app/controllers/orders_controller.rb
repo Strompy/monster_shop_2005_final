@@ -27,6 +27,24 @@ class OrdersController <ApplicationController
     end
   end
 
+  def update
+    order = Order.find(params[:order_id])
+    if order.item_orders.all? {|i_o| i_o. status == 'fulfilled'}
+      order.update(status: 1)
+    end
+    redirect_to "/profile/orders/#{order.id}"
+  end
+
+  def destroy
+    order = Order.find(params[:id])
+    # return any fulfilled items to merchants
+    order.status = 4
+    order.cancel_item_orders
+    order.save
+    flash[:success] = "Your order is cancelled"
+    redirect_by_role(order)
+  end
+
   private
 
   def redirect_by_role(order)
@@ -40,4 +58,5 @@ class OrdersController <ApplicationController
   def order_params
     params.permit(:name, :address, :city, :state, :zip)
   end
+
 end

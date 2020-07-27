@@ -53,4 +53,18 @@ describe "When a visitor goes to their profile page" do
     expect(current_path).to eq("/profile")
     expect(page).to have_content("Your password has been updated!")
   end
+  it "has a link to their order index page" do
+    @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
+    @tire = @meg.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
+    @paper = @meg.items.create(name: "Lined Paper", description: "Great for writing on!", price: 20, image: "https://cdn.vertex42.com/WordTemplates/images/printable-lined-paper-wide-ruled.png", inventory: 3)
+    @pencil = @meg.items.create(name: "Yellow Pencil", description: "You can write on paper with it!", price: 2, image: "https://images-na.ssl-images-amazon.com/images/I/31BlVr01izL._SX425_.jpg", inventory: 100)
+
+    @order_1 = @tanya.orders.create(name: "John", address: "124 Lickit dr", city: "Denver", state: "Colorado", zip: 80890)
+
+    visit "/profile"
+
+    expect(page).to have_link("My Orders")
+    click_on "My Orders"
+    expect(current_path).to eq("/profile/orders")
+  end
 end

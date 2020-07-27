@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   get "/orders/new", to: "orders#new"
   post "/orders", to: "orders#create"
   get "/orders/:id", to: "orders#show"
+  delete "/orders/:id", to: "orders#destroy"
+  patch "/orders/:order_id", to: 'orders#update'
 
   get "/register", to: 'users#new'
   post "/register", to: 'users#create'
@@ -49,10 +51,12 @@ Rails.application.routes.draw do
   get '/profile/password_edit', to: 'users#edit_password' #passwordscontroller?
   patch '/profile/password_update', to: 'users#update_password'
   get '/profile/orders', to: 'user_orders#index'
+  get '/profile/orders/:order_id', to: 'user_orders#show'
 
   namespace :admin do
     get "/dashboard", to: 'dashboard#index'
     get "/merchants/:merchant_id", to: "merchants#show"
+    patch '/dashboard', to: 'dashboard#update'
   end
 
   namespace :merchant do
