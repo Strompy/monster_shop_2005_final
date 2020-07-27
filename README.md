@@ -564,7 +564,7 @@ I see all information about the order, including the following information:
 ```
 
 ```
-[ ] done
+[X] done
 
 User Story 30, User cancels an order
 
@@ -581,7 +581,7 @@ When I click the cancel button for an order, the following happens:
 ```
 
 ```
-[ ] done
+[X] done
 
 User Story 31, All Merchants fulfill items on an order
 
@@ -590,7 +590,7 @@ The order status changes from "pending" to "packaged"
 ```
 
 ```
-[ ] done
+[X] done
 
 User Story 32, Admin can see all orders
 
@@ -612,7 +612,7 @@ Orders are sorted by "status" in this order:
 ```
 
 ```
-[ ] done
+[X] done
 
 User Story 33, Admin can "ship" an order
 
@@ -687,7 +687,7 @@ Then I see everything that merchant would see
 All users can see a merchant index page which will list some basic information about each merchant. When admins visit this page, however, more functionality is found, and it is found at the "/admin/merchants" route.
 
 ```
-[ ] done
+[X] done
 
 User Story 38, Admin disables a merchant account
 

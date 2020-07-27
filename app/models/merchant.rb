@@ -1,4 +1,5 @@
 class Merchant <ApplicationRecord
+  after_initialize :set_status
   has_many :items, dependent: :destroy
   has_many :item_orders, through: :items
 
@@ -8,6 +9,7 @@ class Merchant <ApplicationRecord
                         :state,
                         :zip
 
+  enum status: %w(Enabled Disabled)
 
   def no_orders?
     item_orders.empty?
@@ -25,4 +27,9 @@ class Merchant <ApplicationRecord
     item_orders.distinct.joins(:order).pluck(:city)
   end
 
+  private
+
+  def set_status
+    self.status = 0 if status.nil?
+  end
 end
