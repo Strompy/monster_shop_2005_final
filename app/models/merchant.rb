@@ -27,6 +27,12 @@ class Merchant <ApplicationRecord
     item_orders.distinct.joins(:order).pluck(:city)
   end
 
+  def deactivate_all_items
+    items.each do |item|
+      item.update(active?: false)
+    end
+  end
+
   private
 
   def set_status

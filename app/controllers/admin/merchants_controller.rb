@@ -11,6 +11,7 @@ class Admin::MerchantsController < ApplicationController
   def destroy
     merchant = Merchant.find(params[:merchant_id])
     merchant.update(status: 1)
+    merchant.deactivate_all_items
     flash[:success] = "Merchant has been disabled"
     redirect_to "/admin/merchants"
   end
