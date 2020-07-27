@@ -22,6 +22,7 @@ class Order < ApplicationRecord
       item_order.status = 2
       item_order.save
     end
+
   end
 
   private

@@ -38,6 +38,7 @@ RSpec.describe 'Cart show' do
       expect(page).to_not have_link("Checkout")
     end
   end
+
   describe "Registered users can checkout " do
     before(:each) do
       @mike = Merchant.create(name: "Mike's Print Shop", address: '123 Paper Rd.', city: 'Denver', state: 'CO', zip: 80203)
@@ -60,6 +61,7 @@ RSpec.describe 'Cart show' do
       click_on "Log In"
       allow_any_instance_of(ApplicationController).to receive(:user).and_return(@user)
     end
+    
     it "click the checkout link and create order" do
       visit '/cart'
 
