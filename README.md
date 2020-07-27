@@ -517,7 +517,7 @@ The show page template for an order can be shared between users, merchants and a
 - Admins can fulfill items on order on behalf of a merchant
 
 ```
-[ ] done
+[X] done
 
 User Story 27, User Profile displays Orders link
 
@@ -529,7 +529,7 @@ When I click this link my URI path is "/profile/orders"
 ```
 
 ```
-[ ] done
+[X] done
 
 User Story 28, User Profile displays Orders
 
@@ -545,7 +545,7 @@ I see every order I've made, which includes the following information:
 ```
 
 ```
-[ ] done
+[X] done
 
 User Story 29, User views an Order Show Page
 

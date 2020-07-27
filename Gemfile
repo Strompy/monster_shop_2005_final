@@ -24,7 +24,7 @@ group :development, :test do
   gem 'pry'
   gem 'simplecov'
   gem 'shoulda-matchers'
-  # gem orderly?
+  gem 'orderly'
 end
 
 group :development do
