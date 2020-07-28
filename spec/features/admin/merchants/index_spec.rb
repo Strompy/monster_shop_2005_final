@@ -22,14 +22,15 @@ RSpec.describe "Merchants Index Page" do
     end
 
     it "can inactivate disabled merchant's items" do
+      visit "/items/#{@pull_toy.id}"
+      expect(page).to have_content("Active")
       visit "/admin/merchants"
       within(".merchants-#{@dog_shop.id}") do
         expect(page).to have_button("Disable")
         click_on "Disable"
       end
-      @dog_shop.items.each do |item|
-        expect(item.active?).to eq(false)
-      end
+      visit "/items/#{@pull_toy.id}"
+      expect(page).to have_content("Inactive")
     end
 
     it "can enable a merchant account" do
@@ -49,13 +50,17 @@ RSpec.describe "Merchants Index Page" do
       within(".merchants-#{@dog_shop.id}") do
         click_on "Disable"
         expect(page).to have_content("Disabled")
+      end
+      visit "/items/#{@pull_toy.id}"
+      expect(page).to have_content("Inactive")
+      visit "/admin/merchants"
+      within(".merchants-#{@dog_shop.id}") do
         click_on "Enable"
         expect(page).to have_content("Enabled")
         expect(current_path).to eq("/admin/merchants")
-        @dog_shop.items.each do |item|
-          expect(item.active?).to eq(true)
-        end
       end
+      visit "/items/#{@pull_toy.id}"
+      expect(page).to have_content("Active")
     end
   end
 end
