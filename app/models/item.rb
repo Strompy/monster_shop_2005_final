@@ -33,4 +33,7 @@ class Item <ApplicationRecord
     Item.joins(:item_orders).select('SUM(item_orders.quantity) AS sum_quantity, items.name').group('items.id').order('SUM(item_orders.quantity)').limit(5)
   end
 
+  def deactivate
+    self.update(active?: false)
+  end
 end

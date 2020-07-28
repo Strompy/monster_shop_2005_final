@@ -76,5 +76,10 @@ describe Item, type: :model do
       order = [@chain.name, @tire.name, @plane.name, @pull_toy.name, @dog_bone.name]
       expect(Item.order_by_least_pop.pluck(:name)).to eq(order)
     end
+
+    it "#deactivate" do
+      @pull_toy.deactivate
+      expect(@pull_toy.active?).to eq(false)
+    end
   end
 end
