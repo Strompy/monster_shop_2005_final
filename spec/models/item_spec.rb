@@ -60,12 +60,13 @@ describe Item, type: :model do
       expect(bottom_three).to eq([@review_3,@review_4,@review_5])
     end
 
-    # it 'no orders' do
-    #   expect(@chain.no_orders?).to eq(true)
-    #   order = Order.create(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
-    #   order.item_orders.create(item: @chain, price: @chain.price, quantity: 2)
-    #   expect(@chain.no_orders?).to eq(false)
-    # end
+    it 'no orders' do
+      chain = @bike_shop.items.create(name: "Chain", description: "It'll never break!", price: 50, image: "https://www.rei.com/media/b61d1379-ec0e-4760-9247-57ef971af0ad?size=784x588", inventory: 5)
+      expect(chain.no_orders?).to eq(true)
+      order = @user.orders.create(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
+      order.item_orders.create(item: chain, price: chain.price, quantity: 2)
+      expect(chain.no_orders?).to eq(false)
+    end
 
     it "#order_by_pop" do
       order = [@baklava.name, @dog_bone.name, @pull_toy.name, @plane.name, @tire.name]

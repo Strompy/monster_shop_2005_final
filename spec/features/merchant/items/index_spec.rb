@@ -44,5 +44,17 @@ RSpec.describe "Merchant Items Index Page" do
         expect(page).to have_content("active")
       end
     end
+
+    it "can delete an item" do
+      visit "/merchant/items"
+      within(".items-#{@dog_bone.id}") do
+        click_on "delete"
+      end
+      expect(current_path).to eq("/merchant/items")
+      expect(page).to have_content("Item has been deleted")
+      @dog_shop.reload
+      visit "/merchant/items"
+      expect(page).to_not have_content(@dog_bone.name)
+    end
   end
 end

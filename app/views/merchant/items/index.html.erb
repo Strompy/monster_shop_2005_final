@@ -8,11 +8,12 @@ All Merchant's Items
     <%= image_tag(item.image, alt: "image-#{item.name}") %>
     <% if item.active? %>
       active
-      <%= button_to "deactivate", "/merchant/items/#{item.id}", method: :delete %>
+      <%= button_to "deactivate", "/merchant/items/#{item.id}", method: :patch %>
     <% elsif !item.active? %>
       inactive
       <%= button_to "activate", "/merchant/items/#{item.id}", method: :patch %>
     <% end %>
     <%= item.inventory %>
+    <%= button_to "delete", "/merchant/items/#{item.id}", method: :delete %>
   </section>
 <% end %>
