@@ -59,6 +59,7 @@ Rails.application.routes.draw do
     patch '/dashboard', to: 'dashboard#update'
     get "/merchants", to: 'merchants#index'
     delete "/merchants/:merchant_id", to: 'merchants#destroy'
+    patch "/merchants/:merchant_id", to: 'merchants#update'
   end
 
   namespace :merchant do
@@ -66,5 +67,4 @@ Rails.application.routes.draw do
     get "/items", to: "items#index"
     get "/orders/:order_id", to: "orders#show"
   end
-
 end

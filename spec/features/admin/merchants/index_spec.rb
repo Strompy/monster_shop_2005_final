@@ -9,17 +9,17 @@ RSpec.describe "Merchants Index Page" do
       allow_any_instance_of(ApplicationController).to receive(:user).and_return(@user)
       @pull_toy = @dog_shop.items.create(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32)
     end
-    #
-    # it "can disable a merchant account" do
-    #   visit "/admin/merchants"
-    #   within(".merchants-#{@dog_shop.id}") do
-    #     expect(page).to have_button("Disable")
-    #     click_on "Disable"
-    #     expect(current_path).to eq("/admin/merchants")
-    #     expect(page).to have_content("Disabled")
-    #   end
-    #   expect(page).to have_content("Merchant has been disabled")
-    # end
+
+    it "can disable a merchant account" do
+      visit "/admin/merchants"
+      within(".merchants-#{@dog_shop.id}") do
+        expect(page).to have_button("Disable")
+        click_on "Disable"
+        expect(current_path).to eq("/admin/merchants")
+        expect(page).to have_content("Disabled")
+      end
+      expect(page).to have_content("Merchant has been disabled")
+    end
 
     it "can inactivate disabled merchant's items" do
       visit "/admin/merchants"
@@ -30,6 +30,18 @@ RSpec.describe "Merchants Index Page" do
       @dog_shop.items.each do |item|
         expect(item.active?).to eq(false)
       end
+    end
+
+    it "can enable a merchant account" do
+      visit "/admin/merchants"
+      within(".merchants-#{@dog_shop.id}") do
+        click_on "Disable"
+        expect(page).to have_button("Enable")
+        click_on "Enable"
+        expect(current_path).to eq("/admin/merchants")
+        expect(page).to have_content("Enabled")
+      end
+      expect(page).to have_content("Merchant's account is now enabled")
     end
   end
 end

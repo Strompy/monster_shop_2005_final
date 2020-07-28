@@ -6,6 +6,8 @@ All Merchants
     <%= merchant.status %>
     <% if merchant.status == "Enabled" %>
       <%= button_to "Disable", "/admin/merchants/#{merchant.id}", method: :delete %>
+    <% elsif merchant.status == "Disabled" %>
+      <%= button_to "Enable", "/admin/merchants/#{merchant.id}", method: :patch %>
     <% end %>
   </section>
 <% end %>
