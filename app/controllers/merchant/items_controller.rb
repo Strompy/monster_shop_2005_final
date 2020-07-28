@@ -4,6 +4,9 @@ class Merchant::ItemsController < Merchant::BaseController
     @items = user.merchant.items
   end
 
+  def new
+  end
+
   def destroy
     item = Item.find(params[:item_id])
     if item.no_orders?
@@ -25,5 +28,21 @@ class Merchant::ItemsController < Merchant::BaseController
       flash[:success] = "Item is now available for sale"
     end
     redirect_to "/merchant/items"
+  end
+
+  def create
+    item = user.merchant.items.create(item_params)
+    if item.save
+      flash[:success] = "Item has been saved"
+      redirect_to "/merchant/items"
+    end
+  end
+
+  private
+  def item_params
+    if params[:image].empty?
+      params[:image] = "https://cateringbywestwood.com/wp-content/uploads/2015/11/dog-placeholder.jpg"
+    end
+    params.permit(:name, :description, :price, :image, :inventory)
   end
 end

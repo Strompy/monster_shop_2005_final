@@ -56,5 +56,21 @@ RSpec.describe "Merchant Items Index Page" do
       visit "/merchant/items"
       expect(page).to_not have_content(@dog_bone.name)
     end
+
+    it "can add an item" do
+      visit "/merchant/items"
+      click_on "Add New Item"
+      expect(current_path).to eq("/merchant/items/new")
+      fill_in :name, with: "Dog Treat"
+      fill_in :description, with: "Tastes great"
+      fill_in :price, with: 3.50
+      fill_in :inventory, with: 50
+      click_on "Submit"
+      expect(current_path).to eq("/merchant/items")
+      expect(page).to have_content("Item has been saved")
+      expect(page).to have_content("Dog Treat")
+      expect(page).to have_content("active")
+      expect(page).to have_css("img[src=\"https://cateringbywestwood.com/wp-content/uploads/2015/11/dog-placeholder.jpg\"]")
+    end
   end
 end

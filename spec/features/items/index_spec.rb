@@ -85,10 +85,7 @@ RSpec.describe "Items Index Page" do
       find(:xpath, "//a/img[@alt='Pull Toy: photo']/..").click
 
       expect(current_path).to eq("/items/#{@pull_toy.id}")
-
     end
-
-
   end
 
   describe "When looking at the item index" do

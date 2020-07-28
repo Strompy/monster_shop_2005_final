@@ -68,5 +68,7 @@ Rails.application.routes.draw do
     get "/orders/:order_id", to: "orders#show"
     delete "/items/:item_id", to: 'items#destroy'
     patch "/items/:item_id", to: 'items#update'
+    get "/items/new", to: 'items#new'
+    post "/items", to: 'items#create'
   end
 end
