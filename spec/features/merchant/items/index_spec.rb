@@ -72,5 +72,16 @@ RSpec.describe "Merchant Items Index Page" do
       expect(page).to have_content("active")
       expect(page).to have_css("img[src=\"https://cateringbywestwood.com/wp-content/uploads/2015/11/dog-placeholder.jpg\"]")
     end
+
+    it "cannot add an item if details are bad/missing" do
+      visit "/merchant/items"
+      click_on "Add New Item"
+      fill_in :name, with: "New Item"
+      click_on "Submit"
+      expect(page).to have_content("Description can't be blank")
+      expect(page).to have_content("Price can't be blank")
+      expect(page).to have_content("Inventory can't be blank")
+      expect(find_field(:name).value).to eq('New Item')
+    end
   end
 end

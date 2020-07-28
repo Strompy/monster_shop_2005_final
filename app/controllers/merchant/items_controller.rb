@@ -5,6 +5,7 @@ class Merchant::ItemsController < Merchant::BaseController
   end
 
   def new
+    @user_input ||= Hash.new("")
   end
 
   def destroy
@@ -35,6 +36,10 @@ class Merchant::ItemsController < Merchant::BaseController
     if item.save
       flash[:success] = "Item has been saved"
       redirect_to "/merchant/items"
+    else
+      @user_input = item_params
+      flash[:errors] = item.errors.full_messages
+      render :new
     end
   end
 
