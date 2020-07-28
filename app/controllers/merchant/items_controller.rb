@@ -19,18 +19,6 @@ class Merchant::ItemsController < Merchant::BaseController
     redirect_to "/merchant/items"
   end
 
-  def update
-    item = Item.find(params[:item_id])
-    if item.active?
-      item.deactivate
-      flash[:success] = "Item is no longer for sale"
-    else
-      item.activate
-      flash[:success] = "Item is now available for sale"
-    end
-    redirect_to "/merchant/items"
-  end
-
   def create
     item = user.merchant.items.create(item_params)
     if item.save
@@ -41,6 +29,17 @@ class Merchant::ItemsController < Merchant::BaseController
       flash[:errors] = item.errors.full_messages
       render :new
     end
+  end
+
+  def edit
+    @item = Item.find(params[:item_id])
+  end
+
+  def update
+    item = Item.find(params[:item_id])
+    item.update(item_params)
+    flash[:succes] = "Item has been updated"
+    redirect_to "/merchant/items"
   end
 
   private

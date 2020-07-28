@@ -83,5 +83,30 @@ RSpec.describe "Merchant Items Index Page" do
       expect(page).to have_content("Inventory can't be blank")
       expect(find_field(:name).value).to eq('New Item')
     end
+
+    it "can edit an item" do
+      visit "/merchant/items"
+      within(".items-#{@dog_bone.id}") do
+        expect(page).to have_content(@dog_bone.name)
+        expect(page).to have_content("inactive")
+        click_on "edit"
+      end
+      expect(current_path).to eq("/merchant/items/#{@dog_bone.id}/edit")
+      expect(find_field(:name).value).to eq(@dog_bone.name)
+      expect(find_field(:description).value).to eq(@dog_bone.description)
+      expect(find_field(:price).value).to eq("#{@dog_bone.price}")
+      expect(find_field(:image).value).to eq(@dog_bone.image)
+      expect(find_field(:inventory).value).to eq("#{@dog_bone.inventory}")
+      fill_in :name, with: "Puppy bone"
+      click_on "Save changes"
+      expect(current_path).to eq("/merchant/items")
+      expect(page).to have_content("Item has been updated")
+      @dog_bone.reload
+      visit "/merchant/items"
+      within(".items-#{@dog_bone.id}") do
+        expect(page).to have_content("Puppy bone")
+        expect(page).to have_content("inactive")
+      end
+    end
   end
 end
