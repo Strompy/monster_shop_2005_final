@@ -1,14 +1,6 @@
-class Merchant::DashboardController < ApplicationController
-  before_action :require_merchant
+class Merchant::DashboardController < Merchant::BaseController
 
   def index
     @merchant = user
-  end
-
-  private
-  def require_merchant
-    if user.nil? || !user.merchant?
-      render file: "/public/404"
-    end
   end
 end
