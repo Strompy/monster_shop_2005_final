@@ -33,6 +33,12 @@ class Merchant <ApplicationRecord
     end
   end
 
+  def activate_all_items
+    items.each do |item|
+      item.update(active?: true)
+    end
+  end
+
   private
 
   def set_status

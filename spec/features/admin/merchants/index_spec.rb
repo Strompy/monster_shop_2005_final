@@ -43,5 +43,19 @@ RSpec.describe "Merchants Index Page" do
       end
       expect(page).to have_content("Merchant's account is now enabled")
     end
+
+    it "can inactivate disabled merchant's items" do
+      visit "/admin/merchants"
+      within(".merchants-#{@dog_shop.id}") do
+        click_on "Disable"
+        expect(page).to have_content("Disabled")
+        click_on "Enable"
+        expect(page).to have_content("Enabled")
+        expect(current_path).to eq("/admin/merchants")
+        @dog_shop.items.each do |item|
+          expect(item.active?).to eq(true)
+        end
+      end
+    end
   end
 end

@@ -19,6 +19,7 @@ class Admin::MerchantsController < ApplicationController
   def update
     merchant = Merchant.find(params[:merchant_id])
     merchant.update(status: 0)
+    merchant.activate_all_items
     flash[:success] = "Merchant's account is now enabled"
     redirect_to "/admin/merchants"
   end
