@@ -37,9 +37,13 @@ class Merchant::ItemsController < Merchant::BaseController
 
   def update
     item = Item.find(params[:item_id])
-    item.update(item_params)
-    flash[:succes] = "Item has been updated"
-    redirect_to "/merchant/items"
+    if item.update(item_params)
+      flash[:succes] = "Item has been updated"
+      redirect_to "/merchant/items"
+    else
+      flash[:error] = item.errors.full_messages
+      redirect_to "/merchant/items/#{item.id}/edit"
+    end
   end
 
   private
