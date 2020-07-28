@@ -58,5 +58,22 @@ describe Merchant, type: :model do
       expect(@meg.distinct_cities).to include("Hershey")
     end
 
+    it "deactivate_all_items" do
+      @meg.deactivate_all_items
+      @meg.items.each do |item|
+        expect(item.active?).to eq(false)
+      end
+    end
+
+    it "activate_all_items" do
+      @meg.deactivate_all_items
+      @meg.items.each do |item|
+        expect(item.active?).to eq(false)
+      end
+      @meg.activate_all_items
+      @meg.items.each do |item|
+        expect(item.active?).to eq(true)
+      end
+    end
   end
 end
