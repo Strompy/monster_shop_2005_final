@@ -1,4 +1,4 @@
-class Item <ApplicationRecord
+ class Item <ApplicationRecord
   belongs_to :merchant
   has_many :reviews, dependent: :destroy
   has_many :item_orders
@@ -35,5 +35,9 @@ class Item <ApplicationRecord
 
   def deactivate
     self.update(active?: false)
+  end
+
+  def activate
+    self.update(active?: true)
   end
 end

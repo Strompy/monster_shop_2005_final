@@ -81,5 +81,12 @@ describe Item, type: :model do
       @pull_toy.deactivate
       expect(@pull_toy.active?).to eq(false)
     end
+
+    it "#activate" do
+      @pull_toy.deactivate
+      expect(@pull_toy.active?).to eq(false)
+      @pull_toy.activate
+      expect(@pull_toy.active?).to eq(true)
+    end
   end
 end

@@ -11,6 +11,7 @@ All Merchant's Items
       <%= button_to "deactivate", "/merchant/items/#{item.id}", method: :delete %>
     <% elsif !item.active? %>
       inactive
+      <%= button_to "activate", "/merchant/items/#{item.id}", method: :patch %>
     <% end %>
     <%= item.inventory %>
   </section>
