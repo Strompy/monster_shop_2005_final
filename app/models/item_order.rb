@@ -1,5 +1,5 @@
 class ItemOrder <ApplicationRecord
-  after_initialize :default_status
+  after_initialize :default_status, :set_merchant
 
   validates_presence_of :item_id, :order_id, :price, :quantity
 
@@ -16,6 +16,13 @@ class ItemOrder <ApplicationRecord
 
   def default_status
     self.status = 0 if status.nil?
+  end
+
+  def set_merchant
+    if !item.nil?
+      item = Item.find(self.item_id)
+      self.item_merchant_id = item.merchant_id
+    end
   end
 
 end

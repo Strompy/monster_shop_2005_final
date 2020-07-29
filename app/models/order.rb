@@ -22,7 +22,10 @@ class Order < ApplicationRecord
       item_order.status = 2
       item_order.save
     end
+  end
 
+  def merchant_item_orders(merchant_id)
+    item_orders.where(item_merchant_id: merchant_id)
   end
 
   private
