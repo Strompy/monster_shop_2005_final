@@ -1,4 +1,4 @@
-class Item <ApplicationRecord
+ class Item <ApplicationRecord
   belongs_to :merchant
   has_many :reviews, dependent: :destroy
   has_many :item_orders
@@ -33,4 +33,11 @@ class Item <ApplicationRecord
     Item.joins(:item_orders).select('SUM(item_orders.quantity) AS sum_quantity, items.name').group('items.id').order('SUM(item_orders.quantity)').limit(5)
   end
 
+  def deactivate
+    self.update(active?: false)
+  end
+
+  def activate
+    self.update(active?: true)
+  end
 end

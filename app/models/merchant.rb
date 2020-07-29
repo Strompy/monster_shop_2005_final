@@ -39,6 +39,18 @@ class Merchant <ApplicationRecord
     end
   end
 
+  def orders(merchant_id)
+    Order.joins(:items).where("merchant_id = #{merchant_id}")
+  end
+
+  def merch_quantity(order_id)
+    item_orders.where("order_id = #{order_id}").sum('item_orders.quantity')
+  end
+
+  def merch_total(order_id)
+    item_orders.where("order_id = #{order_id}").sum('item_orders.price * item_orders.quantity')
+  end
+
   private
 
   def set_status
