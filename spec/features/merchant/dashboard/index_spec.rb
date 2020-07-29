@@ -10,11 +10,11 @@ RSpec.describe "Merchant Dashboard" do
 
     it "displays the name and full address of the merchant they work for" do
       visit "/merchant/dashboard"
-      expect(page).to have_content(@user.name)
-      expect(page).to have_content(@user.address)
-      expect(page).to have_content(@user.city)
-      expect(page).to have_content(@user.state)
-      expect(page).to have_content(@user.zip)
+      expect(page).to have_content(@dog_shop.name)
+      expect(page).to have_content(@dog_shop.address)
+      expect(page).to have_content(@dog_shop.city)
+      expect(page).to have_content(@dog_shop.state)
+      expect(page).to have_content(@dog_shop.zip)
     end
 
     it "displays a link to view merchant's items" do

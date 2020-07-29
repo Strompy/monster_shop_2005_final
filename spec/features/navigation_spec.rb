@@ -119,7 +119,8 @@ RSpec.describe 'Site Navigation' do
 
   describe "As a merchant" do
     before :each do
-      @user = User.create!(name: "Tanya", address: "145 Uvula dr", city: "Lake", state: "Michigan", zip: "77967", email: "T-tar@gmail.com", password: "Bangladesh134", role: 1)
+      @dog_shop = Merchant.create(name: "Brian's Dog Shop", address: '125 Doggo St.', city: 'Denver', state: 'CO', zip: 80210)
+      @user = User.create!(name: "Tanya", address: "145 Uvula dr", city: "Lake", state: "Michigan", zip: "77967", email: "T-tar@gmail.com", password: "Bangladesh134", role: 1, merchant: @dog_shop)
       visit "/login"
 
       expect(@user.merchant?).to be_truthy
