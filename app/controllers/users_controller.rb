@@ -4,15 +4,20 @@ class UsersController < ApplicationController
   end
 
   def create
+    if params[:c_password] == params[:password]
     user = User.create(user_params)
-    # add c_password and check for equal
-    if user.save
-      flash[:success] = "Welcome to the black market #{user.name}"
-      session[:user_id] = user.id
-      redirect_to "/profile"
+      if user.save
+        flash[:success] = "Welcome to the black market #{user.name}"
+        session[:user_id] = user.id
+        redirect_to "/profile"
+      else
+        @user_input = user_params
+        flash[:error] = user.errors.full_messages
+        render :new
+      end
     else
+      flash[:error] = "Passwords must match"
       @user_input = user_params
-      flash[:error] = user.errors.full_messages
       render :new
     end
   end
@@ -46,9 +51,14 @@ class UsersController < ApplicationController
 
   def update_password
     user = User.find(session[:user_id])
-    user.update(user_params)
-    flash[:success] = "Your password has been updated!"
-    redirect_to "/profile"
+    if params[:c_password] == params[:password]
+      user.update(user_params)
+      flash[:success] = "Your password has been updated!"
+      redirect_to "/profile"
+    else
+      flash[:error] = "Passwords must match"
+      redirect_to "/profile/password_edit"
+    end
   end
 
   private
