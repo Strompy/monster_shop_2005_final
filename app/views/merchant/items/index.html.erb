@@ -22,9 +22,9 @@
   <% elsif !item.active? %>
     <center><%= button_to "activate", "/merchant/items/#{item.id}/toggle", method: :patch %></center>
   <% end %>
-  <br><center><%= button_to "delete", "/merchant/items/#{item.id}", method: :delete %></center>
+  <center><%= button_to "delete", "/merchant/items/#{item.id}", method: :delete %></center>
   </section>
 <% end %>
 </section>
 
-<%= link_to "Add New Item", "/merchant/items/new" %>
+<h2><center><%= link_to "Add New Item", "/merchant/items/new" %></center></h2>
