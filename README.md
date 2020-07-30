@@ -16,7 +16,7 @@ Run `$ rails s` to start the server
 Run `bundle exec rspec` to run the automated test suite
 
 ## Schema
-![Application Scheme](/Users/kathybui/turing/2-mod/projects/monster_shop_2005/app/assets/images/Screen Shot 2020-07-30 at 3.50.31 PM.png)
+![Application Scheme]()
 
 ## Website
 
@@ -68,6 +68,7 @@ DESTROY
   end
 ```
 
+**Controllers**
 BASE CONTROLLER
 We implemented a BaseController for both the Admin and the Merchant to handle the restrictions on views only authorized users were allowed to see.
 ```
@@ -99,7 +100,7 @@ We created a private method that redirected users depending on their authorizati
   end
 ```
 
-MODELS
+**MODELS**
 We were able to create models for all of our active record resources.
 
 Model defaults for records without specific data
@@ -137,6 +138,8 @@ MODEL METHODS
     Item.joins(:item_orders).select('SUM(item_orders.quantity) AS sum_quantity, items.name').group('items.id').order('SUM(item_orders.quantity) desc').limit(5)
   end
 ```
+
+**Views**
 
 FORM VIEWS
 ```
