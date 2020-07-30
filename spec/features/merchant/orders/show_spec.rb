@@ -66,12 +66,5 @@ RSpec.describe "Merchant Order Show Page" do
     expect(page).to_not have_button("Fulfill Item")
 
     expect(page).to have_content("Inventory too low to fulfill order")
-
-    # As a merchant employee
-    # When I visit an order show page from my dashboard
-    # For each item of mine in the order
-    # If the user's desired quantity is greater than my current inventory quantity for that item
-    # Then I do not see a "fulfill" button or link
-    # Instead I see a notice next to the item indicating I cannot fulfill this item
   end
 end
