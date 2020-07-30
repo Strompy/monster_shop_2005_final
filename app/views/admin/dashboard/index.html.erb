@@ -10,7 +10,7 @@
 <% end %>
 
 <h2>Pending:</h2>
-<p><%= "None at this time" if @orders.packaged.empty? %>
+<p><%= "None at this time" if @orders.pending.empty? %>
 <% @orders.pending.each do |order| %>
   <p>Name: <%= order.name %></p>
   <p>Order Id: <%= order.id%></p>
@@ -18,7 +18,7 @@
 <% end %>
 
 <h2>Shipped:</h2>
-<p><%= "None at this time" if @orders.packaged.empty? %>
+<p><%= "None at this time" if @orders.shipped.empty? %>
 <% @orders.shipped.each do |order| %>
   <p>Name: <%= order.name %></p>
   <p>Order Id: <%= order.id%></p>
@@ -26,7 +26,7 @@
 <% end %>
 
 <h2>Cancelled:</h2>
-<p><%= "None at this time" if @orders.packaged.empty? %>
+<p><%= "None at this time" if @orders.cancelled.empty? %>
 <% @orders.cancelled.each do |order| %>
   <p>Name: <%= order.name %></p>
   <p>Order Id: <%= order.id%></p>
