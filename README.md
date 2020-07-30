@@ -2,8 +2,6 @@
 
 "Monster Shop" is a fictitious e-commerce platform where users can register to place items into a shopping cart and 'check out'. Users who work for a merchant can mark their items as 'fulfilled'; the last merchant to mark items in an order as 'fulfilled' will be able to get "shipped" by an admin. Each user role will have access to some or all CRUD functionality for application models.
 
-[Heroku Link](https://pacific-mesa-85748.herokuapp.com/)
-
 ## Setup
 ```
 git clone https://github.com/Chulstro/monster_shop_2005
@@ -18,7 +16,8 @@ Run `$ rails s` to start the server
 Run `bundle exec rspec` to run the automated test suite
 
 ## Schema
-![Application Scheme]('https://files.slack.com/files-pri/T029P2S9M-F0181G480GJ/screen_shot_2020-07-30_at_4.52.48_pm.png')
+![Application Scheme](https://files.slack.com/files-pri/T029P2S9M-F0181G480GJ/screen_shot_2020-07-30_at_4.52.48_pm.png)
+![Application Scheme](https://d33wubrfki0l68.cloudfront.net/eab45e25bb79970178fab7a2d10cba0209372a59/94d9e/assets/images/philly-magic-garden.jpg)
 
 ## Website
 
@@ -157,11 +156,8 @@ Edit Item
 
 ## Contributors
 Kathy Bui [GitHub](https://github.com/Kathybui732)
-
 Chandler Hulstrom [Github](https://https://github.com/Chulstro)
-
 Phillip Strom [Github](https://github.com/Strompy/)
-
 [Heroku Link](https://pacific-mesa-85748.herokuapp.com/)
 
 ## Wishlist
