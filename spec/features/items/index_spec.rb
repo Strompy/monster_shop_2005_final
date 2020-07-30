@@ -115,12 +115,12 @@ RSpec.describe "Items Index Page" do
     it "has popularity statistics" do
       visit "/items"
 
-      order = "#{@baklava.name} 89 #{@dog_bone.name} 65 #{@pull_toy.name} 7 #{@plane.name} 6 #{@tire.name} 3"
+      order = "#{@baklava.name} - Total Sold: 89\n#{@dog_bone.name} - Total Sold: 65\n#{@pull_toy.name} - Total Sold: 7\n#{@plane.name} - Total Sold: 6\n#{@tire.name} - Total Sold: 3"
       within "#pop" do
         expect(page).to have_content(order)
       end
 
-      reverse_order = "#{@chain.name} 1 #{@tire.name} 3 #{@plane.name} 6 #{@pull_toy.name} 7 #{@dog_bone.name} 65"
+      reverse_order = "#{@chain.name} - Total Sold: 1\n#{@tire.name} - Total Sold: 3\n#{@plane.name} - Total Sold: 6\n#{@pull_toy.name} - Total Sold: 7\n#{@dog_bone.name} - Total Sold: 65"
       within "#least_pop" do
         expect(page).to have_content(reverse_order)
       end
