@@ -135,6 +135,18 @@ RSpec.describe "Merchants Index Page" do
       expect(page).to_not have_content(@dog_bone.name)
     end
 
+    it "cannot delete an item with orders" do
+      order = @user_1.orders.create(name: "John", address: "124 Lickit dr", city: "Denver", state: "Colorado", zip: 80890)
+      ItemOrder.create(item: @dog_bone, order: order, quantity: 7, price: 10)
+
+      visit "/admin/merchants/#{@dog_shop.id}/items"
+      within(".items-#{@dog_bone.id}") do
+        click_on "delete"
+      end
+      expect(current_path).to eq("/admin/merchants/#{@dog_shop.id}/items")
+      expect(page).to have_content("Item has been ordered before and cannot be deleted")
+    end
+
     it "can add an item" do
       visit "/admin/merchants/#{@dog_shop.id}/items"
       click_on "Add New Item"
