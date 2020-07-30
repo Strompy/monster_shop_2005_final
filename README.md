@@ -21,6 +21,10 @@ Run `bundle exec rspec` to run the automated test suite
 ![Application Scheme](/app/assets/images/schema.jpg)
 
 ## Website
+![Application Reviews](/app/assets/images/Reviews.jpg)
+![Application Cart](/app/assets/images/cart.jpg)
+![Application Items Index](/app/assets/images/items_index.jpg)
+![Application User Index](/app/assets/images/user_index.jpg)
 
 ## Code Snippets
 **CRUD functionality**
