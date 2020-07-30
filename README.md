@@ -16,7 +16,7 @@ Run `$ rails s` to start the server
 Run `bundle exec rspec` to run the automated test suite
 
 ## Schema
-![Application Scheme](/assets/images/schema.jpg)
+![Application Scheme](https://imgur.com/Ap10OKZ)
 
 ## Website
 
