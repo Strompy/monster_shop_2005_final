@@ -1,13 +1,17 @@
 <h1>Order: <%= @order.id %></h1>
 
+<center>
 <h3>Shipping Information</h3>
 <p>Name: <%= @order.name %></p>
 <p>Address: <%= @order.address %></p>
 <p>City: <%= @order.city %></p>
 <p>State: <%= @order.state %></p>
-<p>Zip: <%= @order.zip %></p>
+<p>Zip: <%= @order.zip %></p><br>
+<center>
 
-<h3>Item Information</h3>
+<h3>Ordered Items</h3>
+<section class="grid-container">
+
 <% @order.merchant_item_orders(user.merchant_id).each do |item_order| %>
 <section class="item-<%= item_order.item.id %>">
   <p><%= link_to item_order.item.name, "/merchant/items/#{item_order.item.id}" %></p>
@@ -18,7 +22,8 @@
   <% if item_order.pending? && item_order.item.enough_inventory?(item_order.quantity)%>
     <%= button_to "Fulfill Item", "/merchant/items/#{item_order.id}/fulfill", method: :patch %>
   <% elsif !item_order.item.enough_inventory?(item_order.quantity) %>
-    <p>Inventory too low to fulfill order</p>
+    <h4>Inventory too low to fulfill order</h4>
   <% end %>
 </section>
 <% end %>
+</section>
