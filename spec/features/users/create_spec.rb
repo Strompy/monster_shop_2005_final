@@ -81,4 +81,27 @@ RSpec.describe "When I use the navbar to register a user" do
     expect(current_path).to eq('/profile')
 
   end
+
+  it "flashes spcific error messages when passwords dont match" do
+    visit "/merchants"
+
+    within 'nav' do
+      click_link "Register"
+    end
+
+    expect(current_path).to eq('/register')
+
+    fill_in :name, with: "John"
+    fill_in :address, with: "hoho"
+    fill_in :city, with: "Johnville"
+    fill_in :state, with: "Johntucky"
+    fill_in :zip, with: 69870
+
+    fill_in :password, with: "password"
+    fill_in :c_password, with: "super"
+    click_on "Submit"
+
+    expect(current_path).to eq('/register')
+    expect(page).to have_content("Passwords must match")
+  end
 end

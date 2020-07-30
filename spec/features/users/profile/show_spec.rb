@@ -67,4 +67,9 @@ describe "When a visitor goes to their profile page" do
     click_on "My Orders"
     expect(current_path).to eq("/profile/orders")
   end
+
+  it "doesnt render a page for a non_user" do
+    click_on "Log Out"
+    visit "/profile"
+  end
 end

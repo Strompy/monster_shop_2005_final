@@ -2,7 +2,7 @@
 
 <h2>Packaged:</h2>
 <% @orders.packaged.each do |order| %>
-  <p>Name: <%= order.name %></p>
+  <p>Name: <%= link_to order.name, "/admin/orders/#{order.id}" %></p>
   <p>Order Id: <%= order.id%></p>
   <p>Created At: <%= order.created_at %></p>
   <%= link_to "Ship Order", "/admin/dashboard?id=#{order.id}", method: :patch %>
@@ -10,21 +10,21 @@
 
 <h2>Pending:</h2>
 <% @orders.pending.each do |order| %>
-  <p>Name: <%= order.name %></p>
+  <p>Name: <%= link_to order.name, "/admin/orders/#{order.id}" %></p>
   <p>Order Id: <%= order.id%></p>
   <p>Created At: <%= order.created_at %></p>
 <% end %>
 
 <h2>Shipped:</h2>
 <% @orders.shipped.each do |order| %>
-  <p>Name: <%= order.name %></p>
+  <p>Name: <%= link_to order.name, "/admin/orders/#{order.id}" %></p>
   <p>Order Id: <%= order.id%></p>
   <p>Created At: <%= order.created_at %></p>
 <% end %>
 
 <h2>Cancelled:</h2>
 <% @orders.cancelled.each do |order| %>
-  <p>Name: <%= order.name %></p>
+  <p>Name: <%= link_to order.name, "/admin/orders/#{order.id}" %></p>
   <p>Order Id: <%= order.id%></p>
   <p>Created At: <%= order.created_at %></p>
 <% end %>

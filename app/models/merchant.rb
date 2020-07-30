@@ -40,7 +40,7 @@ class Merchant <ApplicationRecord
   end
 
   def orders(merchant_id)
-    Order.joins(:items).where("merchant_id = #{merchant_id}")
+    Order.joins(:items).where("merchant_id = #{merchant_id}").distinct
   end
 
   def merch_quantity(order_id)

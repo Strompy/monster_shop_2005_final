@@ -33,4 +33,15 @@ describe "When a visitor goes to their profile page" do
     expect(current_path).to eq("/profile/edit")
     expect(page).to have_content("Email has already been taken")
   end
+
+  it "won't change a password if not confirmed" do
+    click_on "Edit Password"
+
+    fill_in :password, with: "password"
+    fill_in :c_password, with: "passwordfsf"
+
+    click_on "Submit"
+    expect(current_path).to eq("/profile/password_edit")
+    expect(page).to have_content("Passwords must match")
+  end
 end
