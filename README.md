@@ -2,6 +2,8 @@
 
 "Monster Shop" is a fictitious e-commerce platform where users can register to place items into a shopping cart and 'check out'. Users who work for a merchant can mark their items as 'fulfilled'; the last merchant to mark items in an order as 'fulfilled' will be able to get "shipped" by an admin. Each user role will have access to some or all CRUD functionality for application models.
 
+[Heroku Link](https://pacific-mesa-85748.herokuapp.com/)
+
 ## Setup
 ```
 git clone https://github.com/Chulstro/monster_shop_2005
@@ -155,8 +157,11 @@ Edit Item
 
 ## Contributors
 Kathy Bui [GitHub](https://github.com/Kathybui732)
+
 Chandler Hulstrom [Github](https://https://github.com/Chulstro)
-Phillip Storm [Github](https://github.com/Strompy/)
+
+Phillip Strom [Github](https://github.com/Strompy/)
+
 [Heroku Link](https://pacific-mesa-85748.herokuapp.com/)
 
 ## Wishlist
