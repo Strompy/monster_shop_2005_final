@@ -9,7 +9,21 @@ RSpec.describe "Merchants Index Page" do
       allow_any_instance_of(ApplicationController).to receive(:user).and_return(@user)
       @pull_toy = @dog_shop.items.create(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32)
     end
+    it "displays all merchant accounts and their info" do
+      visit "/admin/merchants"
 
+      expect(page).to have_link(@bike_shop.name)
+      expect(page).to have_content(@bike_shop.city)
+      expect(page).to have_content(@bike_shop.state)
+      expect(page).to have_link(@dog_shop.name)
+      expect(page).to have_content(@dog_shop.city)
+      expect(page).to have_content(@dog_shop.state)
+
+      click_on @bike_shop.name
+
+      expect(current_path).to eq("/admin/merchants/#{@bike_shop.id}")
+      # The merchant's name is a link to their Merchant Dashboard at routes such as "/admin/merchants/5"
+    end
     it "can disable a merchant account" do
       visit "/admin/merchants"
       within(".merchants-#{@dog_shop.id}") do
