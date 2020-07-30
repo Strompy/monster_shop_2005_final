@@ -77,7 +77,9 @@ Rails.application.routes.draw do
     patch "/items/:item_id/toggle", to: 'toggle_items#update'
     get "/items/new", to: 'items#new'
     post "/items", to: 'items#create'
+    get "/items/:item_id", to: "items#show"
     get "/items/:item_id/edit", to: 'items#edit'
     patch "/items/:item_id", to: 'items#update'
+    patch "/items/:item_order_id/fulfill", to: "fulfill#update"
   end
 end

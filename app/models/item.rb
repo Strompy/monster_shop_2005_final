@@ -25,6 +25,15 @@
     item_orders.empty?
   end
 
+  def enough_inventory?(order_quantity)
+    inventory >= order_quantity
+  end
+
+  def update_inventory(order_quantity)
+    self.inventory -= order_quantity
+    self.save
+  end
+
   def self.order_by_pop
     Item.joins(:item_orders).select('SUM(item_orders.quantity) AS sum_quantity, items.name').group('items.id').order('SUM(item_orders.quantity) desc').limit(5)
   end
