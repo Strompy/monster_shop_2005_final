@@ -1,5 +1,6 @@
-Edit Item
+<h1>Edit Item</h1>
 
+<center>
 <%= form_tag "/merchant/items/#{@item.id}", method: :patch do %>
   <%= label_tag :name %>
   <%= text_field_tag :name, @item.name %>
@@ -14,3 +15,4 @@ Edit Item
 
   <%= submit_tag %>
 <% end %>
+</center>
