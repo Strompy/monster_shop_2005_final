@@ -89,5 +89,15 @@ describe Item, type: :model do
       @pull_toy.activate
       expect(@pull_toy.active?).to eq(true)
     end
+
+    it "can check for enough inventory" do
+      expect(@pull_toy.enough_inventory?(1)).to eq(true)
+      expect(@pull_toy.enough_inventory?(1000)).to eq(false)
+    end
+
+    it "update_inventory" do
+      @pull_toy.update_inventory(1)
+      expect(@pull_toy.inventory).to eq(31)
+    end
   end
 end

@@ -8,6 +8,10 @@ class Merchant::ItemsController < Merchant::BaseController
     @user_input ||= Hash.new("")
   end
 
+  def show
+    @item = Item.find(params[:item_id])
+  end
+
   def destroy
     item = Item.find(params[:item_id])
     if item.no_orders?

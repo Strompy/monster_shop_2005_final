@@ -11,6 +11,7 @@ RSpec.describe "Merchant Order Show Page" do
     @order = @user.orders.create(name: "John", address: "124 Lickit dr", city: "Denver", state: "Colorado", zip: 80890)
     ItemOrder.create(item: @pull_toy, order: @order, quantity: 7, price: 10)
     ItemOrder.create(item: @chain, order: @order, quantity: 1, price: 50)
+
   end
 
   it "displays a list of pending orders that merchant currently sell" do
@@ -37,5 +38,40 @@ RSpec.describe "Merchant Order Show Page" do
     expect(page).to have_content(@pull_toy.price)
     expect(page).to have_content("Quantity: 7")
     expect(page).to_not have_content(@chain.name)
+
+    click_on @pull_toy.name
+    expect(current_path).to eq("/merchant/items/#{@pull_toy.id}")
+  end
+  it "has links to fulfill item orders based on status and item inventory" do
+    visit "/items/#{@pull_toy.id}"
+    expect(page).to have_content("32")
+
+    visit "/merchant/orders/#{@order.id}"
+
+    expect(page).to have_button("Fulfill Item")
+    click_on "Fulfill Item"
+
+    expect(current_path).to eq("/merchant/orders/#{@order.id}")
+
+    expect(page).to have_content("Status: fulfilled")
+    expect(page).to have_content("Item has been successfully fulfilled")
+
+    visit "/items/#{@pull_toy.id}"
+    expect(page).to have_content("25")
+  end
+  it "cannot fulfill an order due to lack of inventory" do
+    @pull_toy.update(inventory: 1)
+    visit "/merchant/orders/#{@order.id}"
+
+    expect(page).to_not have_button("Fulfill Item")
+
+    expect(page).to have_content("Inventory too low to fulfill order")
+
+    # As a merchant employee
+    # When I visit an order show page from my dashboard
+    # For each item of mine in the order
+    # If the user's desired quantity is greater than my current inventory quantity for that item
+    # Then I do not see a "fulfill" button or link
+    # Instead I see a notice next to the item indicating I cannot fulfill this item
   end
 end

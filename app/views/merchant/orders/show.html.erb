@@ -14,5 +14,11 @@
   <%= image_tag item_order.item.image, alt: "#{item_order.item.name} photo" %>
   <p>Price: <%= item_order.price %></p>
   <p>Quantity: <%= item_order.quantity %></p>
+  <p>Status: <%= item_order.status %></p>
+  <% if item_order.pending? && item_order.item.enough_inventory?(item_order.quantity)%>
+    <%= button_to "Fulfill Item", "/merchant/items/#{item_order.id}/fulfill", method: :patch %>
+  <% elsif !item_order.item.enough_inventory?(item_order.quantity) %>
+    <p>Inventory too low to fulfill order</p>
+  <% end %>
 </section>
 <% end %>
