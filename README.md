@@ -18,7 +18,7 @@ Run `$ rails s` to start the server
 Run `bundle exec rspec` to run the automated test suite
 
 ## Schema
-![Application Scheme](https://files.slack.com/files-pri/T029P2S9M-F0181G480GJ/screen_shot_2020-07-30_at_4.52.48_pm.png)
+![Application Scheme](/app/assets/images/schema.jpg)
 ![Application Scheme](https://d33wubrfki0l68.cloudfront.net/eab45e25bb79970178fab7a2d10cba0209372a59/94d9e/assets/images/philly-magic-garden.jpg)
 
 ## Website
