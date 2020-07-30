@@ -2,7 +2,9 @@ All Merchants
 
 <% @merchants.each do |merchant| %>
   <section class="merchants-<%= merchant.id %>">
-    <%= merchant. name %>
+    <%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %>
+    <%= merchant.city %>
+    <%= merchant.state %>
     <%= merchant.status %>
     <% if merchant.status == "Enabled" %>
       <%= button_to "Disable", "/admin/merchants/#{merchant.id}", method: :delete %>

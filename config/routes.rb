@@ -67,6 +67,8 @@ Rails.application.routes.draw do
     post "/merchants/:merchant_id/items", to: 'items#create'
     get "/merchants/:merchant_id/items/:item_id/edit", to: 'items#edit'
     patch "/merchants/:merchant_id/items/:item_id", to: 'items#update'
+    get "/users", to: "users#index"
+    get "/users/:user_id", to: "users#show"
   end
 
   namespace :merchant do
