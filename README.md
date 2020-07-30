@@ -1,6 +1,6 @@
 ## About
 
-"Monster Shop" is a fictitious e-commerce platform where users can register to place items into a shopping cart and 'check out'. Users who work for a merchant can mark their items as 'fulfilled'; the last merchant to mark items in an order as 'fulfilled' will be able to get "shipped" by an admin. Each user role will have access to some or all CRUD functionality for application models.
+"Monster Shop" is a fictitious e-commerce platform where users can register to place items into a shopping cart and 'check out'. Users who work for a merchant can mark their items as 'fulfilled'; the last merchant to mark items in an order as 'fulfilled' will be able to get "shipped" by an admin. Sessions were used in order to aid cart creation. Sessions and bycrypt were used to aid user authentication. Each user role will have access to some or all CRUD functionality for application models.
 
 [Heroku Link](https://pacific-mesa-85748.herokuapp.com/)
 
