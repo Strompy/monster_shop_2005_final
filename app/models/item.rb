@@ -13,6 +13,9 @@
   validates_numericality_of :price, greater_than: 0
   validates_numericality_of :inventory, greater_than: 0
 
+  def self.active_items
+    Item.where(active?: true)
+  end
 
   def average_review
     reviews.average(:rating)

@@ -19,17 +19,27 @@
       <% end %>
     </section>
     <% end %>
+  </section>
+<div class="row">
+  <div class="column">
+  <section class = "top-three-reviews">
+    <h2>Best Sellers</h2>
     <section id = "pop">
       <% @items.order_by_pop.each do |item| %>
-        <%= item.name %>
-        <%= item.sum_quantity %>
+        <p><%= item.name %>
+        - Total Sold: <%= item.sum_quantity %></p>
       <% end %>
     </section>
-
+  </section>
+  </div>
+  <div class="column">
+  <section class = "bottom-three-reviews">
+    <h2>Least Sold</h2>
     <section id = "least_pop">
       <% @items.order_by_least_pop.each do |item| %>
-        <%= item.name %>
-        <%= item.sum_quantity %>
+        <p><%= item.name %>
+        - Total Sold: <%= item.sum_quantity %></p>
       <% end %>
     </section>
-</section>
+  </div>
+</div>

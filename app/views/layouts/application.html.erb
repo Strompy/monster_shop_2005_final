@@ -23,7 +23,7 @@
       <%= link_to "Cart: #{cart.total_items}", "/cart" %>
       <%= link_to "My Profile", "/profile" %>
       <%= link_to "Log Out", "/logout", method: :delete %>
-      You are logged in as <%= user.name %>
+      <p class = "user-name">You are logged in as <%= user.name %></p>
 
       <% elsif user.merchant? %>
       <%= link_to "Cart: #{cart.total_items}", "/cart" %>

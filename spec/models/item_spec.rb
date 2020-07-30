@@ -48,6 +48,10 @@ describe Item, type: :model do
       @review_5 = @chain.reviews.create(title: "Okay place :/", content: "Brian's cool and all but just an okay selection of items", rating: 3)
     end
 
+    it "#collects active_items" do
+      expect(Item.active_items).to eq([@chain, @tire, @pull_toy, @dog_bone, @plane, @baklava])
+    end
+
     it "calculate average review" do
       expect(@chain.average_review).to eq(3.0)
     end
