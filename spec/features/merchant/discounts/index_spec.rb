@@ -6,7 +6,6 @@ RSpec.describe "Merchant Discounts Index" do
     @user = User.create!(name: "Tanya", address: "145 Uvula dr", city: "Lake", state: "Michigan", zip: 80203, email: "merchant@example.com", password: "password", role: 1, merchant: @dog_shop)
     allow_any_instance_of(ApplicationController).to receive(:user).and_return(@user)
   end
-
   it "is accessed via a link from the dashboard" do
     visit "/merchant/dashboard"
 

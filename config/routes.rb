@@ -84,6 +84,8 @@ Rails.application.routes.draw do
     get "/items/:item_id/edit", to: 'items#edit'
     patch "/items/:item_id", to: 'items#update'
     patch "/items/:item_order_id/fulfill", to: "fulfill#update"
-    get "/discounts", to: 'discounts#index'
+    resources :discounts, only: [:index, :new, :create]
+    # get "/discounts", to: 'discounts#index'
+    # get "/discounts/new", to: 'discounts#new'
   end
 end

@@ -1,1 +1,13 @@
 <h1>My Discounts</h1>
+
+<h2><%= link_to "Create New Discount", "/merchant/discounts/new" %></h2>
+
+<section class="grid-container">
+
+<% @merchant.discounts.each do |discount| %>
+  <section class = "grid-item">
+    <p>Discount: <%= number_to_percentage(discount.percent, strip_insignificant_zeros: true) %> off</p>
+    <p>Qualifying Amount: <%= discount.quantity %> or more items</p>
+  </section>
+<% end %>
+</section>
