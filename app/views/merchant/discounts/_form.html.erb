@@ -1,0 +1,7 @@
+<%= form_tag path, method: method do %>
+  <%= label_tag "Percent Discount" %>
+  <%= text_field_tag :percent, @user_input[:percent] %>
+  <%= label_tag "Minimum Required Quantity" %>
+  <%= text_field_tag :quantity, @user_input[:quantity] %>
+  <%= submit_tag button_text %>
+<% end %>

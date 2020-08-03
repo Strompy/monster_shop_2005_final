@@ -4,6 +4,7 @@
   <center>
 
 <h3><%= link_to "My Items", "/merchant/items" %><h3><br>
+<h3><%= link_to "My Discounts", "/merchant/discounts" %></h3>
 
 <h2>My Orders</h2>
 <% @merchant.orders(@merchant.id).each do |order| %>
@@ -12,4 +13,4 @@
   <p>Total number of items: <%= @merchant.merch_quantity(order.id) %></p>
   <p>Grand Total: <%= number_to_currency(@merchant.merch_total(order.id)) %></p><br>
 <% end %>
-<center>
+</center>

@@ -6,9 +6,9 @@ RSpec.describe "As an Admin" do
     allow_any_instance_of(ApplicationController).to receive(:user).and_return(@user)
     @dog_shop = Merchant.create(name: "Brian's Dog Shop", address: '125 Doggo St.', city: 'Denver', state: 'CO', zip: 80210)
   end
-
   it "displays all the merchant info" do
     visit "/merchants"
+
     click_on "Brian's Dog Shop"
     expect(current_path).to eq("/admin/merchants/#{@dog_shop.id}")
     expect(page).to have_content(@dog_shop.name)

@@ -12,7 +12,7 @@ class UsersController < ApplicationController
         redirect_to "/profile"
       else
         @user_input = user_params
-        flash[:error] = user.errors.full_messages
+        flash[:error] = user.errors.full_messages.to_sentence
         render :new
       end
     else
