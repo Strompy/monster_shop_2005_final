@@ -15,8 +15,8 @@ class Merchant::DiscountsController < Merchant::BaseController
       flash[:success] = "Discount Successfully Created"
       redirect_to "/merchant/discounts"
     else
-      @user_input = user_params
-      flash[:error] = user.errors.full_messages.to_sentence
+      @user_input = discount_params
+      flash[:error] = discount.errors.full_messages.to_sentence
       render :new
     end
   end

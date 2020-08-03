@@ -8,7 +8,7 @@ RSpec.describe "As an Admin" do
   end
   it "displays all the merchant info" do
     visit "/merchants"
-    save_and_open_page
+
     click_on "Brian's Dog Shop"
     expect(current_path).to eq("/admin/merchants/#{@dog_shop.id}")
     expect(page).to have_content(@dog_shop.name)

@@ -25,4 +25,20 @@ RSpec.describe "Merchant New Discounts Form" do
     expect(page).to have_content("10% off")
     expect(page).to have_content("10 or more items")
   end
+  it "when given incorrect information returns you to the form and tells you what you incorrectly submitted" do
+    visit new_merchant_discount_path
+
+    click_on "Submit"
+
+    expect(page).to have_content("Quantity can't be blank")
+    expect(page).to have_content("Percent can't be blank")
+
+    fill_in :percent, with: 10
+    click_on "Submit"
+    expect(page).to have_content("Quantity can't be blank")
+    fill_in :quantity, with: 10
+    click_on "Submit"
+    expect(page).to have_content("Discount Successfully Created")
+
+  end
 end
