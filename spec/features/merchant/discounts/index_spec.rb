@@ -42,4 +42,20 @@ RSpec.describe "Merchant Discounts Index" do
 
     expect(page).to have_link("Edit")
   end
+  it "has a link to disable each discount" do
+    @dog_shop.discounts.create!(percent: 5, quantity: 5)
+
+    visit merchant_discounts_path
+    expect(page).to have_button("Cancel")
+    click_on "Cancel"
+
+    expect(current_path).to eq(merchant_discounts_path)
+    expect(page).to have_content("Discount successfully canceled")
+
+    @dog_shop.reload
+    visit merchant_discounts_path
+
+    expect(page).to_not have_content("5%")
+    expect(page).to_not have_content("5 items")
+  end
 end

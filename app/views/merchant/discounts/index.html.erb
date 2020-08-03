@@ -11,5 +11,7 @@
     <p>Qualifying Amount: <%= discount.quantity %> items</p>
     <p><%= link_to "Edit", "/merchant/discounts/#{discount.id}/edit" %></p>
   </section>
+  <center><%= button_to "Cancel", "/merchant/discounts/#{discount.id}", method: :delete %></center>
+
 <% end %>
 </section>
