@@ -32,13 +32,31 @@ RSpec.describe "Merchant Discount Edit Page" do
     visit merchant_discounts_path
 
     click_on "Edit"
-
     expect(current_path).to eq("/merchant/discounts/#{@discount.id}/edit")
 
     fill_in :percent, with: ""
-
     click_on "Edit Discount"
-
     expect(page).to have_content("Percent can't be blank")
+
+    fill_in :percent, with: "110"
+    click_on "Edit Discount"
+    expect(page).to have_content("Percent must be less than or equal to 100")
+
+    fill_in :percent, with: "-10"
+    click_on "Edit Discount"
+    expect(page).to have_content("Percent must be greater than 0")
+
+    fill_in :percent, with: "10"
+    fill_in :quantity, with: ""
+    click_on "Edit Discount"
+    expect(page).to have_content("Quantity can't be blank")
+
+    fill_in :quantity, with: "k"
+    click_on "Edit Discount"
+    expect(page).to have_content("Quantity is not a number")
+
+    fill_in :quantity, with: "-10"
+    click_on "Edit Discount"
+    expect(page).to have_content("Quantity must be greater than 0")
   end
 end
