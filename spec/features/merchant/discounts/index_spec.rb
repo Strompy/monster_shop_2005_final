@@ -35,4 +35,11 @@ RSpec.describe "Merchant Discounts Index" do
     expect(page).to_not have_content("75%")
     expect(page).to_not have_content("1 items")
   end
+  it "has a link to edit each discount" do
+    @dog_shop.discounts.create!(percent: 5, quantity: 5)
+
+    visit merchant_discounts_path
+
+    expect(page).to have_link("Edit")
+  end
 end

@@ -21,6 +21,23 @@ class Merchant::DiscountsController < Merchant::BaseController
     end
   end
 
+  def edit
+    @discount = Discount.find(params[:id])
+    @user_input = {percent: @discount[:percent], quantity: @discount[:quantity]}
+  end
+
+  def update
+    discount = Discount.find(params[:id])
+    if discount.update(discount_params)
+      flash[:success] = "Discount Successfully Updated"
+      redirect_to merchant_discounts_path
+    else
+      # flash[:error] = discount.errors.full_messages.to_sentence
+      # @user_input = discount_params
+      # render :edit
+    end
+  end
+
   private
 
   def discount_params
