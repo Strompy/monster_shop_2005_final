@@ -7,7 +7,7 @@
 <% @merchant.discounts.each do |discount| %>
   <section class = "grid-item">
     <p>Discount: <%= number_to_percentage(discount.percent, strip_insignificant_zeros: true) %> off</p>
-    <p>Qualifying Amount: <%= discount.quantity %> or more items</p>
+    <p>Qualifying Amount: <%= discount.quantity %> items</p>
   </section>
 <% end %>
 </section>

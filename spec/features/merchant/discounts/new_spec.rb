@@ -23,7 +23,7 @@ RSpec.describe "Merchant New Discounts Form" do
     expect(current_path).to eq("/merchant/discounts")
     expect(page).to have_content("Discount Successfully Created")
     expect(page).to have_content("10% off")
-    expect(page).to have_content("10 or more items")
+    expect(page).to have_content("10 items")
   end
   it "when given incorrect information returns you to the form and tells you what you incorrectly submitted" do
     visit new_merchant_discount_path
