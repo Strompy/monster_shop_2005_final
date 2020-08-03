@@ -32,9 +32,9 @@ class Merchant::DiscountsController < Merchant::BaseController
       flash[:success] = "Discount Successfully Updated"
       redirect_to merchant_discounts_path
     else
-      # flash[:error] = discount.errors.full_messages.to_sentence
-      # @user_input = discount_params
-      # render :edit
+      flash[:error] = discount.errors.full_messages.to_sentence
+      @user_input = discount_params
+      render :edit
     end
   end
 

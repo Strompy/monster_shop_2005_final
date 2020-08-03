@@ -21,7 +21,7 @@ RSpec.describe "Merchant Discount Edit Page" do
 
     expect(current_path).to eq(merchant_discounts_path)
     expect(page).to have_content("Discount Successfully Updated")
-    
+
     @discount.reload
     visit merchant_discounts_path
 
@@ -29,6 +29,16 @@ RSpec.describe "Merchant Discount Edit Page" do
     expect(page).to have_content("100 items")
   end
   it "does not let you enter incorrect information" do
+    visit merchant_discounts_path
 
+    click_on "Edit"
+
+    expect(current_path).to eq("/merchant/discounts/#{@discount.id}/edit")
+
+    fill_in :percent, with: ""
+
+    click_on "Edit Discount"
+
+    expect(page).to have_content("Percent can't be blank")
   end
 end
