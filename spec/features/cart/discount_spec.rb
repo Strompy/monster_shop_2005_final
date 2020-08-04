@@ -25,7 +25,7 @@ RSpec.describe 'Cart show page with discounts' do
       fill_in :quantity, with: 10
       click_on "Update Quantity"
     end
-    
+
     expect(current_path).to eq("/cart")
     expect(page).to have_content("Qualified for discount!")
 
@@ -38,16 +38,29 @@ RSpec.describe 'Cart show page with discounts' do
     expect(page).to have_content("Total: $20.00")
   end
   it "Only qualifying merchants and quantities have discount applied" do
-    skip
+    visit "/items/#{@paper.id}"
+    click_on "Add To Cart"
+    visit "/items/#{@tire.id}"
+    click_on "Add To Cart"
+
     visit "/cart"
     within "#cart-item-#{@paper.id}" do
       fill_in :quantity, with: 10
-      click_on "update quantity"
+      click_on "Update Quantity"
     end
 
     within "#cart-item-#{@tire.id}" do
-      expect(page).to have_content("$#{item.price}")
-      expect(page).to have_content("$100")
+      fill_in :quantity, with: 10
+      click_on "Update Quantity"
+    end
+
+    within "#cart-item-#{@tire.id}" do
+      expect(page).to have_content("$#{@tire.price}")
+      expect(page).to_not have_content("$90")
+    end
+
+    within "#cart-item-#{@pencil.id}" do
+      expect(page).to_not have_content("$1.80")
     end
   end
 end
