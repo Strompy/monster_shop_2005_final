@@ -32,10 +32,7 @@ Rails.application.routes.draw do
   delete "/cart", to: "cart#empty"
   delete "/cart/:item_id", to: "cart#remove_item"
 
-  get "/orders/new", to: "orders#new"
-  post "/orders", to: "orders#create"
-  get "/orders/:id", to: "orders#show"
-  delete "/orders/:id", to: "orders#destroy"
+  resources :orders, only: [:new, :create, :show, :destroy]
   patch "/orders/:order_id", to: 'orders#update'
 
   get "/register", to: 'users#new'
@@ -74,12 +71,10 @@ Rails.application.routes.draw do
 
   namespace :merchant do
     get "/dashboard", to: 'dashboard#index'
-    get "/items", to: "items#index"
     get "/orders/:order_id", to: "orders#show"
+    resources :items, only: [:index, :new, :create]
     delete "/items/:item_id", to: 'items#destroy'
     patch "/items/:item_id/toggle", to: 'toggle_items#update'
-    get "/items/new", to: 'items#new'
-    post "/items", to: 'items#create'
     get "/items/:item_id", to: "items#show"
     get "/items/:item_id/edit", to: 'items#edit'
     patch "/items/:item_id", to: 'items#update'
