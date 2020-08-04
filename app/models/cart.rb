@@ -41,7 +41,11 @@ class Cart
   end
 
   def subtotal(item)
-    item.price * cart_quantity(item)
+    if gets_discount?(item)
+      discount_subtotal(item)
+    else
+      item.price * cart_quantity(item)
+    end
   end
 
   def discount_subtotal(item)
