@@ -22,8 +22,31 @@ class Cart
     item_quantity
   end
 
+  def cart_quantity(item)
+    @contents[item.id.to_s]
+  end
+
+  def best_discount(item)
+    item.merchant.discounts.where(quantity: cart_quantity(item))
+                            .order(percent: :desc).limit(1)
+  end
+
+  def gets_discount?(item)
+    best_discount(item).count == 1
+  end
+
+  def discount_price(item)
+    discount = best_discount(item)[0]
+    item.price * (1 - (discount.percent  / 100))
+  end
+
   def subtotal(item)
-    item.price * @contents[item.id.to_s]
+    item.price * cart_quantity(item)
+  end
+
+  def discount_subtotal(item)
+    discount = best_discount(item)[0]
+    cart_quantity(item) * discount_price(item)
   end
 
   def total

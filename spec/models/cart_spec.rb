@@ -47,5 +47,35 @@ RSpec.describe Cart do
       expect(@cart.subtotal(@ogre)).to eq(20)
       expect(@cart.subtotal(@giant)).to eq(100)
     end
+
+    it '.cart_quantity(item)' do
+      expect(@cart.cart_quantity(@giant)).to eq(2)
+    end
+
+    it ".best_discount(item)" do
+      @megan.discounts.create!(percent: 7, quantity: 2)
+      best = @megan.discounts.create!(percent: 10, quantity: 2)
+
+      expect(@cart.best_discount(@giant)).to eq([best])
+    end
+
+    it ".gets_discount?(item)" do
+      @megan.discounts.create!(percent: 10, quantity: 2)
+
+      expect(@cart.gets_discount?(@giant)).to eq(true)
+      expect(@cart.gets_discount?(@ogre)).to eq(false)
+    end
+
+    it ".discount_price(item)" do
+      @megan.discounts.create!(percent: 10, quantity: 2)
+
+      expect(@cart.discount_price(@giant)).to eq(45)
+    end
+
+    it ".discount_subtotal()" do
+      @megan.discounts.create!(percent: 10, quantity: 2)
+
+      expect(@cart.discount_subtotal(@giant)).to eq(90)
+    end
   end
 end
