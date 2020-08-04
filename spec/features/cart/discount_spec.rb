@@ -63,7 +63,7 @@ RSpec.describe 'Cart show page with discounts' do
       expect(page).to_not have_content("$1.80")
     end
   end
-  it "discounts are no lonerger applied when decreasing item quantity" do
+  it "discounts are no longer applied when decreasing item quantity" do
     visit "/cart"
 
     within "#cart-item-#{@pencil.id}" do
@@ -99,5 +99,28 @@ RSpec.describe 'Cart show page with discounts' do
     end
 
     expect(page).to have_content("Total: $10.00")
+  end
+  it "many items that do not qualify individually dont qualifiy together" do
+    visit "/items/#{@paper.id}"
+    click_on "Add To Cart"
+
+    visit "/cart"
+    within "#cart-item-#{@paper.id}" do
+      fill_in :quantity, with: 7
+      click_on "Update Quantity"
+    end
+
+    within "#cart-item-#{@pencil.id}" do
+      fill_in :quantity, with: 7
+      click_on "Update Quantity"
+    end
+
+    within "#cart-item-#{@paper.id}" do
+      expect(page).to_not have_content("$18")
+    end
+
+    within "#cart-item-#{@pencil.id}" do
+      expect(page).to_not have_content("$1.80")
+    end
   end
 end
