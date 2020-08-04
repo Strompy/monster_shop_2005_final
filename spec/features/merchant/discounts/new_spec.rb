@@ -30,12 +30,12 @@ RSpec.describe "Merchant New Discounts Form" do
 
     click_on "Submit"
 
-    expect(page).to have_content("Quantity can't be blank")
-    expect(page).to have_content("Percent can't be blank")
+    expect(page).to have_content("Quantity is not a number")
+    expect(page).to have_content("Percent is not a number")
 
     fill_in :percent, with: 10
     click_on "Submit"
-    expect(page).to have_content("Quantity can't be blank")
+    expect(page).to have_content("Quantity is not a number")
     fill_in :quantity, with: 10
     click_on "Submit"
     expect(page).to have_content("Discount Successfully Created")

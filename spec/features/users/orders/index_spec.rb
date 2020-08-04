@@ -16,7 +16,6 @@ RSpec.describe "User Orders Index page" do
     ItemOrder.create!(order: @order_1, item: @pencil, price: 2, quantity: 2)
     ItemOrder.create!(order: @order_2, item: @paper, price: 20, quantity: 3)
 
-
     allow_any_instance_of(ApplicationController).to receive(:user).and_return(@user)
   end
   it "displays every order they made and the order information" do
