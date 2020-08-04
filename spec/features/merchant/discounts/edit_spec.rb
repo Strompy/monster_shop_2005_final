@@ -36,7 +36,7 @@ RSpec.describe "Merchant Discount Edit Page" do
 
     fill_in :percent, with: ""
     click_on "Edit Discount"
-    expect(page).to have_content("Percent can't be blank")
+    expect(page).to have_content("Percent is not a number")
 
     fill_in :percent, with: "110"
     click_on "Edit Discount"
@@ -49,7 +49,7 @@ RSpec.describe "Merchant Discount Edit Page" do
     fill_in :percent, with: "10"
     fill_in :quantity, with: ""
     click_on "Edit Discount"
-    expect(page).to have_content("Quantity can't be blank")
+    expect(page).to have_content("Quantity is not a number")
 
     fill_in :quantity, with: "k"
     click_on "Edit Discount"

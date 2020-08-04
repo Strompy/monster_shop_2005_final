@@ -21,8 +21,13 @@ class CartController < ApplicationController
       remove_item
     else
       cart.contents[params[:item_id]] = quantity
+      flash[:success] = "Qualified for discount!" if bulk_discount_message?(item)
       redirect_to '/cart'
     end
+  end
+
+  def bulk_discount_message?(item)
+    cart.gets_discount?(item)
   end
 
   def show

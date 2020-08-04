@@ -26,7 +26,12 @@
         </p>
       </td>
       <td>
-        <p><%=number_to_currency(item.price)%></p>
+        <% if cart.gets_discount?(item) %>
+        <p class = "old-price"><%=number_to_currency(item.price)%></p>
+        <p class = "new-price"><%=number_to_currency(cart.discount_price(item))%></p>
+        <% else %>
+          <p><%=number_to_currency(item.price)%></p>
+        <% end %>
       </td>
       <td>
         <center>
@@ -40,7 +45,12 @@
         </center>
         </td>
       <td>
-        <p><%=number_to_currency(cart.subtotal(item))%></p>
+        <% if cart.gets_discount?(item) %>
+        <p class = "old-price"><%=number_to_currency(cart.subtotal(item))%></p>
+        <p class = "new-price"><%=number_to_currency(cart.discount_subtotal(item))%></p>
+        <% else %>
+          <p><%=number_to_currency(cart.subtotal(item))%></p>
+        <% end %>
     </td>
     </tr>
   <% end %>
