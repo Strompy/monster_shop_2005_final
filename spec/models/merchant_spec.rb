@@ -89,7 +89,8 @@ describe Merchant, type: :model do
       order_2.item_orders.create!(item: chain, price: chain.price, quantity: 2)
       order_3.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
 
-      expect(@meg.orders(@meg.id)).to eq([order_1, order_2, order_3])
+      expected = [order_1, order_2, order_3]
+      expect(@meg.orders(@meg.id)).to eq(expected)
     end
 
     it ".merch_quantity(order_id)" do
