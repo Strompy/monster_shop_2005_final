@@ -45,14 +45,31 @@ class Cart
   end
 
   def discount_subtotal(item)
-    discount = best_discount(item)[0]
     cart_quantity(item) * discount_price(item)
   end
 
+  def discount?
+    items.any? { |item| gets_discount?(item[0]) }
+  end
+
   def total
-    @contents.sum do |item_id,quantity|
-      Item.find(item_id).price * quantity
+    if discount?
+      discounted_total
+    else
+      @contents.sum do |item_id,quantity|
+        Item.find(item_id).price * quantity
+      end
     end
+  end
+
+  def discounted_total
+    total = 0
+    @contents.each do |item_id,quantity|
+      item = Item.find(item_id)
+      total += discount_subtotal(item) if gets_discount?(item)
+      total += subtotal(item) if !gets_discount?(item)
+    end
+    total
   end
 
 end

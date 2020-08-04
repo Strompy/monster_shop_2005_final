@@ -77,5 +77,25 @@ RSpec.describe Cart do
 
       expect(@cart.discount_subtotal(@giant)).to eq(90)
     end
+
+    it "discount?" do
+      expect(@cart.discount?).to eq(false)
+    end
+
+    it "discounted_total" do
+      @megan.discounts.create!(percent: 10, quantity: 2)
+      cart = Cart.new({
+        @ogre.id.to_s => 1,
+        @giant.id.to_s => 2
+        })
+
+      expect(cart.discounted_total).to eq(110)
+    end
+
+    it '.total with discount' do
+      @megan.discounts.create!(percent: 10, quantity: 2)
+        
+      expect(@cart.total).to eq(110)
+    end
   end
 end
