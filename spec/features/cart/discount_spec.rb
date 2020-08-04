@@ -35,7 +35,7 @@ RSpec.describe 'Cart show page with discounts' do
       expect(page).to have_content("$18")
     end
 
-    expect(page).to have_content("Total: $20.00")
+    expect(page).to have_content("Total: $18.00")
   end
   it "Only qualifying merchants and quantities have discount applied" do
     visit "/items/#{@paper.id}"
@@ -62,5 +62,42 @@ RSpec.describe 'Cart show page with discounts' do
     within "#cart-item-#{@pencil.id}" do
       expect(page).to_not have_content("$1.80")
     end
+  end
+  it "discounts are no lonerger applied when decreasing item quantity" do
+    visit "/cart"
+
+    within "#cart-item-#{@pencil.id}" do
+      fill_in :quantity, with: 10
+      click_on "Update Quantity"
+    end
+
+    expect(current_path).to eq("/cart")
+    expect(page).to have_content("Qualified for discount!")
+
+    within "#cart-item-#{@pencil.id}" do
+      expect(page).to have_content("$1.80")
+      expect(page).to have_content("10")
+      expect(page).to have_content("$18")
+    end
+
+    expect(page).to have_content("Total: $18.00")
+
+    within "#cart-item-#{@pencil.id}" do
+      fill_in :quantity, with: 5
+      click_on "Update Quantity"
+    end
+
+    expect(current_path).to eq("/cart")
+    expect(page).to_not have_content("Qualified for discount!")
+
+    within "#cart-item-#{@pencil.id}" do
+      expect(page).to_not have_content("$1.80")
+      expect(page).to_not have_content("$18")
+      expect(page).to have_content("$2.00")
+      expect(page).to have_content("5")
+      expect(page).to have_content("$10")
+    end
+
+    expect(page).to have_content("Total: $10.00")
   end
 end
