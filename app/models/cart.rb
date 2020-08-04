@@ -27,7 +27,7 @@ class Cart
   end
 
   def best_discount(item)
-    item.merchant.discounts.where(quantity: cart_quantity(item))
+    item.merchant.discounts.where('quantity <= ?', cart_quantity(item))
                             .order(percent: :desc).limit(1)
   end
 

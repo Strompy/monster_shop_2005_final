@@ -66,7 +66,7 @@ RSpec.describe 'Cart show page with discounts' do
     visit "/cart"
 
     within "#cart-item-#{@pencil.id}" do
-      fill_in :quantity, with: 10
+      fill_in :quantity, with: 15
       click_on "Update Quantity"
     end
 
@@ -75,11 +75,11 @@ RSpec.describe 'Cart show page with discounts' do
 
     within "#cart-item-#{@pencil.id}" do
       expect(page).to have_content("$1.80")
-      expect(page).to have_content("10")
-      expect(page).to have_content("$18")
+      expect(page).to have_content("15")
+      expect(page).to have_content("$27")
     end
 
-    expect(page).to have_content("Total: $18.00")
+    expect(page).to have_content("Total: $27.00")
 
     within "#cart-item-#{@pencil.id}" do
       fill_in :quantity, with: 5
