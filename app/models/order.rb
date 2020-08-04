@@ -17,6 +17,16 @@ class Order < ApplicationRecord
     item_orders.sum(:quantity)
   end
 
+  # def create_item_orders(cart)
+  #   cart.items.each do |item,quantity|
+  #     order.item_orders.create({
+  #       item: item,
+  #       quantity: quantity,
+  #       price: item.price
+  #       })
+  #   end
+  # end
+
   def cancel_item_orders
     item_orders.each do |item_order|
       item_order.status = 2

@@ -24,7 +24,10 @@
  	color: #002244;
  	font-family: "Marker Felt", fantasy;
  }
-
+.old-price {
+  color: red;
+  text-decoration: line-through;
+}
 ul{
   padding: 0px;
   text-align: center;

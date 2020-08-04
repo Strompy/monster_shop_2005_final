@@ -94,7 +94,7 @@ RSpec.describe Cart do
 
     it '.total with discount' do
       @megan.discounts.create!(percent: 10, quantity: 2)
-        
+
       expect(@cart.total).to eq(110)
     end
   end

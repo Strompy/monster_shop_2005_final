@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     cart ||= Cart.new(session[:cart] ||= Hash.new(0))
   end
 
-  def user #Rename to current_user?
+  def user
     unless session[:user_id].nil?
       @user ||= User.find(session[:user_id])
     end

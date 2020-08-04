@@ -11,13 +11,7 @@ class OrdersController <ApplicationController
   def create
     order = user.orders.create(order_params)
     if order.save
-      cart.items.each do |item,quantity|
-        order.item_orders.create({
-          item: item,
-          quantity: quantity,
-          price: item.price
-          })
-      end
+      price_selector(order)
       session.delete(:cart)
       flash[:success] = "Order successfully placed"
       redirect_by_role(order)
@@ -59,4 +53,29 @@ class OrdersController <ApplicationController
     params.permit(:name, :address, :city, :state, :zip)
   end
 
+  def price_selector(order)
+    cart.items.each do |item,quantity|
+      if cart.gets_discount?(item)
+        create_discount_item_order(order, item, quantity)
+      else
+        create_item_order(order, item, quantity)
+      end
+    end
+  end
+
+  def create_discount_item_order(order, item, quantity)
+    order.item_orders.create({
+      item: item,
+      quantity: quantity,
+      price: cart.discount_price(item)
+      })
+  end
+
+  def create_item_order(order, item, quantity)
+    order.item_orders.create({
+      item: item,
+      quantity: quantity,
+      price: item.price
+      })
+  end
 end

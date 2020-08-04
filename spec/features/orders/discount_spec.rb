@@ -1,7 +1,6 @@
-require 'rails_helper'
 
 RSpec.describe("New Order Page") do
-  describe "When I check out from my cart" do
+  describe "When I check out with discounted items" do
     before(:each) do
       @mike = Merchant.create(name: "Mike's Print Shop", address: '123 Paper Rd.', city: 'Denver', state: 'CO', zip: 80203)
       @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
@@ -13,8 +12,7 @@ RSpec.describe("New Order Page") do
 
       allow_any_instance_of(ApplicationController).to receive(:user).and_return(user)
 
-      visit "/items/#{@paper.id}"
-      click_on "Add To Cart"
+
       visit "/items/#{@paper.id}"
       click_on "Add To Cart"
       visit "/items/#{@tire.id}"
@@ -22,48 +20,48 @@ RSpec.describe("New Order Page") do
       visit "/items/#{@pencil.id}"
       click_on "Add To Cart"
     end
-    it "I see all the information about my current cart" do
+    it "charges the discounted price and is reflected on the index and show pages" do
+      @mike.discounts.create!(percent: 10, quantity: 10)
+
       visit "/cart"
+
+      within "#cart-item-#{@pencil.id}" do
+        fill_in :quantity, with: 10
+        click_on "Update Quantity"
+      end
 
       click_on "Checkout"
 
-      within "#order-item-#{@tire.id}" do
-        expect(page).to have_link(@tire.name)
-        expect(page).to have_link("#{@tire.merchant.name}")
-        expect(page).to have_content("$#{@tire.price}")
-        expect(page).to have_content("1")
-        expect(page).to have_content("$100")
-      end
+      name = "Bert"
+      address = "123 Sesame St."
+      city = "NYC"
+      state = "New York"
+      zip = 10001
 
-      within "#order-item-#{@paper.id}" do
-        expect(page).to have_link(@paper.name)
-        expect(page).to have_link("#{@paper.merchant.name}")
-        expect(page).to have_content("$#{@paper.price}")
-        expect(page).to have_content("2")
-        expect(page).to have_content("$40")
-      end
+      fill_in :name, with: name
+      fill_in :address, with: address
+      fill_in :city, with: city
+      fill_in :state, with: state
+      fill_in :zip, with: zip
 
-      within "#order-item-#{@pencil.id}" do
+      click_button "Create Order"
+
+      expect(page).to have_content("Grand Total: $138.00")
+      new_order = Order.last
+
+      visit "/orders/#{new_order.id}"
+
+      within "#item-#{@pencil.id}" do
         expect(page).to have_link(@pencil.name)
         expect(page).to have_link("#{@pencil.merchant.name}")
-        expect(page).to have_content("$#{@pencil.price}")
-        expect(page).to have_content("1")
-        expect(page).to have_content("$2")
+        expect(page).to have_content("$1.80")
+        expect(page).to have_content("10")
+        expect(page).to have_content("$18")
       end
 
-      expect(page).to have_content("Total: $142")
-    end
-
-    it "I see a form where I can enter my shipping info" do
-      visit "/cart"
-      click_on "Checkout"
-
-      expect(page).to have_field(:name)
-      expect(page).to have_field(:address)
-      expect(page).to have_field(:city)
-      expect(page).to have_field(:state)
-      expect(page).to have_field(:zip)
-      expect(page).to have_button("Create Order")
+      within "#grandtotal" do
+        expect(page).to have_content("Total: $138")
+      end
     end
   end
 end
