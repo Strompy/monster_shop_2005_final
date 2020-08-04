@@ -14,7 +14,6 @@ RSpec.describe 'Cart show page with discounts' do
     # click_on "Add To Cart"
     visit "/items/#{@pencil.id}"
     click_on "Add To Cart"
-    @items_in_cart = [@paper,@tire,@pencil]
     user = User.create!(name: "Tanya", address: "145 Uvula dr", city: "Lake", state: "Michigan", zip: 80203, email: "tot@example.com", password: "password", role: 0)
     allow_any_instance_of(ApplicationController).to receive(:user).and_return(user)
   end
@@ -122,5 +121,26 @@ RSpec.describe 'Cart show page with discounts' do
     within "#cart-item-#{@pencil.id}" do
       expect(page).to_not have_content("$1.80")
     end
+  end
+  it "Only best discount gets applied" do
+    @mike.discounts.create!(percent: 7, quantity: 10)
+
+    visit "/cart"
+
+    within "#cart-item-#{@pencil.id}" do
+      fill_in :quantity, with: 10
+      click_on "Update Quantity"
+    end
+
+    expect(current_path).to eq("/cart")
+    expect(page).to have_content("Qualified for discount!")
+
+    within "#cart-item-#{@pencil.id}" do
+      expect(page).to have_content("$1.80")
+      expect(page).to have_content("10")
+      expect(page).to have_content("$18")
+    end
+
+    expect(page).to have_content("Total: $18.00")
   end
 end
